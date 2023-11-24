@@ -1,8 +1,7 @@
+import { Mode } from './Mode'
+
 export interface ModeItem {
-	id: string
+	id: Mode
 	title: string
 	icon: string
-	color: string
-	additionalStyles: string
-	additionalStylesSelected: string
 }

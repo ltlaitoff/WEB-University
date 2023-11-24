@@ -1,1 +1,6 @@
 export * from './ModeItem'
+export * from './Category'
+export * from './Colors'
+export * from './Mode'
+export * from './RightPanelModes'
+export * from './Statistic'
