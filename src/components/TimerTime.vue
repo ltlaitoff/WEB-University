@@ -20,5 +20,3 @@ const props = defineProps<{
 		<TimerDigit :digit="props.seconds" />
 	</div>
 </template>
-
-<style scoped></style>

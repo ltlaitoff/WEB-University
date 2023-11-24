@@ -28,13 +28,13 @@ const TIMER_LONG_BREAK_MODE = computed(
 )
 
 const timer = useTimer(Date.now() + TIMER_POMODORO_MODE.value, false)
+// TODO: Remove / move to mounted
 resetTimer()
 
+// TODO: 50/50
 userSettings.$subscribe(() => resetTimer())
 
 function onPlayOrPauseClick() {
-	console.log(timer.isRunning.value)
-
 	if (timer.isRunning.value) {
 		timer.pause()
 		return
@@ -70,16 +70,12 @@ onMounted(() => {
 					currentApproach.value = 1
 
 					statisticStore.add({
-						_id: String(Date.now()),
-						date: String(Date.now() - TIMER_LONG_BREAK_MODE.value),
 						mode: selectedMode.value,
 						count: TIMER_LONG_BREAK_MODE.value,
 						category: userSettings.settings.selectedCategory
 					})
 				} else {
 					statisticStore.add({
-						_id: String(Date.now()),
-						date: String(Date.now() - TIMER_SHORT_BREAK_MODE.value),
 						mode: selectedMode.value,
 						count: TIMER_SHORT_BREAK_MODE.value,
 						category: userSettings.settings.selectedCategory
@@ -91,8 +87,6 @@ onMounted(() => {
 			}
 
 			statisticStore.add({
-				_id: String(Date.now()),
-				date: String(Date.now() - TIMER_POMODORO_MODE.value),
 				mode: selectedMode.value,
 				count: TIMER_POMODORO_MODE.value,
 				category: userSettings.settings.selectedCategory

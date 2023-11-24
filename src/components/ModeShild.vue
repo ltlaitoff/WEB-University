@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import tailwindColors from 'tailwindcss/colors'
 
+import { modeText } from '@constants'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 import { Mode } from '@types'
 
@@ -9,12 +10,6 @@ const props = defineProps<{
 }>()
 
 const userSettings = useUserSettingsStore()
-
-const textData: Record<Mode, string> = {
-	[Mode.pomodoro]: 'Focus',
-	[Mode.short]: 'Short break',
-	[Mode.long]: 'Long break'
-}
 </script>
 
 <template>
@@ -26,9 +21,7 @@ const textData: Record<Mode, string> = {
 				color: tailwindColors[userSettings.colors[props.mode]]['950']
 			}"
 		>
-			{{ textData[props.mode] }}
+			{{ modeText[props.mode] }}
 		</div>
 	</div>
 </template>
-
-<style scoped></style>

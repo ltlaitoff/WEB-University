@@ -21,7 +21,12 @@ const opened = ref(false)
 
 function onChange(category: Category) {
 	emit('update:modelValue', category)
+	// TODO: Add close on escape
 	opened.value = false
+}
+
+function toggleOpened() {
+	opened.value = !opened.value
 }
 
 function hideSelect() {
@@ -42,7 +47,7 @@ function hideSelect() {
 				'--category-select-bg-hover':
 					tailwindColors[props.modelValue.color]['100']
 			}"
-			@click="opened = !opened"
+			@click="toggleOpened"
 		>
 			<div class="circle w-3 h-3 rounded-full item-colors"></div>
 			<div class="">{{ props.modelValue.name }}</div>

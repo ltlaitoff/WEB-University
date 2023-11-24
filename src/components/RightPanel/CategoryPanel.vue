@@ -6,6 +6,7 @@ import tailwindColors from 'tailwindcss/colors'
 
 import TrashIcon from '@assets/icons/trash.svg'
 import { useCategoryStore } from '@store/categoriesStore'
+import { AddNewCategory } from '@types'
 
 import CategoryForm from './CategoryForm.vue'
 
@@ -15,6 +16,10 @@ const categoryStore = useCategoryStore()
 
 function closeModal() {
 	modalOpened.value = false
+}
+
+function submitForm(payload: AddNewCategory) {
+	categoryStore.add(payload)
 }
 </script>
 
@@ -36,6 +41,7 @@ function closeModal() {
 			<CategoryForm
 				class="top-12 z-50 bg-white"
 				@close="closeModal"
+				@submit="submitForm"
 				v-if="modalOpened"
 			/>
 		</div>

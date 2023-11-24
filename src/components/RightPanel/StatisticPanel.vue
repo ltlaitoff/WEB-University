@@ -10,6 +10,7 @@ import { useStatistic } from '@store/statisticStore'
 const statisticStore = useStatistic()
 
 const statisticForOutput = computed(() => {
+	// Move to helpers
 	return statisticStore.statistic.toSorted((a, b) => {
 		return Number(b.date) - Number(a.date)
 	})

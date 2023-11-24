@@ -6,9 +6,6 @@ import HomePage from '@pages/HomePage.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
 const userSettings = useUserSettingsStore()
-console.log(
-	tailwindColors[userSettings.colors[userSettings.settings.selectedMode]]
-)
 </script>
 
 <template>

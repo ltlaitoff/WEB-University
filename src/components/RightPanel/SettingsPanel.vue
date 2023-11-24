@@ -7,7 +7,7 @@ import { Mode } from '@types'
 
 const userSettings = useUserSettingsStore()
 
-const modes: Mode[] = Object.keys(Mode) as Mode[]
+const modes: Mode[] = Object.values(Mode) as Mode[]
 </script>
 
 <template>

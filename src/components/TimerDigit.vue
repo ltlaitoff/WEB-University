@@ -5,19 +5,17 @@ const props = defineProps<{
 	digit: number
 }>()
 
-const leftDigit = computed(() =>
-	props.digit >= 10 ? props.digit.toString()[0] : '0'
-)
-const rightDigit = computed(() =>
-	props.digit >= 10 ? props.digit.toString()[1] : props.digit.toString()
-)
+const stringDigit = computed(() => {
+	const digit = props.digit
+
+	if (digit >= 10) return String(digit)
+
+	return '0' + String(digit)
+})
 </script>
 
 <template>
-	<span class="single-digit">
-		{{ leftDigit }}
-	</span>
-	<span class="single-digit">
-		{{ rightDigit }}
+	<span>
+		{{ stringDigit }}
 	</span>
 </template>
