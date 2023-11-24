@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useStatistic } from '@store/statisticStore'
-import ModeShild from '@components/ModeShild.vue'
-import TrashIcon from '@assets/icons/trash.svg'
 import { computed } from 'vue'
+
 import tailwindColors from 'tailwindcss/colors'
+
+import TrashIcon from '@assets/icons/trash.svg'
+import ModeShild from '@components/ModeShild.vue'
+import { useStatistic } from '@store/statisticStore'
 
 const statisticStore = useStatistic()
 

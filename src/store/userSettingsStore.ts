@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import { Mode } from '../types/Mode'
-import { Colors } from '../types/Colors'
-import { Category } from '../types/Category'
+
+import { Category, Colors, Mode } from '@types'
 
 interface UserSettingsStore {
 	settings: {

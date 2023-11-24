@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import tailwindColors from 'tailwindcss/colors'
-import { useCategoryStore } from '../store/categoriesStore'
-import { Category } from '../types/Category'
+
 import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
+import tailwindColors from 'tailwindcss/colors'
+
+import { useCategoryStore } from '@store/categoriesStore'
+import { Category } from '@types'
 
 const props = defineProps<{
 	modelValue: Category

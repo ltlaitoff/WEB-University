@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import SelectMode from '@components/SelectMode.vue'
-import ControlButtons from '@components/ControlButtons.vue'
-import TimerTime from '@components/TimerTime.vue'
-import { useUserSettingsStore } from '@store/userSettingsStore'
-import { watchEffect, onMounted, ref, computed } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useTimer } from 'vue-timer-hook'
-import { ModeItem } from '../types/ModeItem'
-import { useStatistic } from '@store/statisticStore'
+
 import CategorySelect from '@components/CategorySelect.vue'
-import { Mode } from '../types/Mode'
+import ControlButtons from '@components/ControlButtons.vue'
+import SelectMode from '@components/SelectMode.vue'
+import TimerTime from '@components/TimerTime.vue'
+import { useStatistic } from '@store/statisticStore'
+import { useUserSettingsStore } from '@store/userSettingsStore'
+import { Mode, ModeItem } from '@types'
 
 const userSettings = useUserSettingsStore()
 const statisticStore = useStatistic()

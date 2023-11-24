@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import traiwindColors from 'tailwindcss/colors'
-import { Colors } from '../types/Colors'
+
+import { Colors } from '@types'
 
 const props = defineProps<{
 	value: Colors

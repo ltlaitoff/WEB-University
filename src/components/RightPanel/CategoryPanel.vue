@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import CategoryForm from './CategoryForm.vue'
+
 import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 import tailwindColors from 'tailwindcss/colors'
+
 import TrashIcon from '@assets/icons/trash.svg'
 import { useCategoryStore } from '@store/categoriesStore'
+
+import CategoryForm from './CategoryForm.vue'
 
 const modalOpened = ref(false)
 

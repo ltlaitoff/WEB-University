@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
 import ColorPicker from '@components/ColorPicker.vue'
+import { useCategoryStore } from '@store/categoriesStore'
 import { Colors } from '@types'
-import { useCategoryStore } from '../../store/categoriesStore'
 
 const categoriesStore = useCategoryStore()
 const name = ref('')

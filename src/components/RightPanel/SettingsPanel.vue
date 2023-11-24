@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ColorPicker from '@components/ColorPicker.vue'
+import ModeShild from '@components/ModeShild.vue'
 import NumberInput from '@components/NumberInput.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
-import ModeShild from '@components/ModeShild.vue'
 import { Mode } from '@types'
 
 const userSettings = useUserSettingsStore()

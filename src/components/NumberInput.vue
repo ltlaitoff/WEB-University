@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import PlusIcon from '../assets/icons/plus.svg'
-import MinusIcon from '../assets/icons/minus.svg'
+
+import MinusIcon from '@assets/icons/minus.svg'
+import PlusIcon from '@assets/icons/plus.svg'
 
 const props = defineProps<{
 	modelValue: number

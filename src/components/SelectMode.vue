@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import BrainIcon from '@assets/icons/brain.svg'
-import BedIcon from '@assets/icons/bed.svg'
-import CupIcon from '@assets/icons/cup.svg'
-import { ModeItem, Mode, Colors } from '@types'
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
-
 import { computed, ref } from 'vue'
+
+import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 import tailwindColors from 'tailwindcss/colors'
+
+import BedIcon from '@assets/icons/bed.svg'
+import BrainIcon from '@assets/icons/brain.svg'
+import CupIcon from '@assets/icons/cup.svg'
+import { Colors, Mode, ModeItem } from '@types'
 
 const props = defineProps<{
 	modelValue: Mode

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import RightPanel from './components/RightPanel/RightPanel.vue'
 import tailwindColors from 'tailwindcss/colors'
-import HomePage from './pages/HomePage.vue'
+
+import RightPanel from '@components/RightPanel/RightPanel.vue'
+import HomePage from '@pages/HomePage.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
 const userSettings = useUserSettingsStore()

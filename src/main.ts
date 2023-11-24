@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
+
 import { createPinia } from 'pinia'
-import App from './App.vue'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+import App from './App.vue'
 import './style.css'
 
 const app = createApp(App)

@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useUserSettingsStore } from '@store/userSettingsStore'
+
 import tailwindColors from 'tailwindcss/colors'
+
+import { useUserSettingsStore } from '@store/userSettingsStore'
+import { RightPanelModes } from '@types'
+
+import CategoryPanel from './CategoryPanel.vue'
 import PanelButtons from './PanelButtons.vue'
 import SettingsPanel from './SettingsPanel.vue'
 import StatisticPanel from './StatisticPanel.vue'
-import CategoryPanel from './CategoryPanel.vue'
-import { RightPanelModes } from '@types'
 
 const userSettings = useUserSettingsStore()
 
