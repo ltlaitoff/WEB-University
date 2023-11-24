@@ -1,0 +1,65 @@
+<script setup lang="ts">
+import { reactive } from 'vue'
+import { useUserSettingsStore } from '@store/userSettingsStore'
+import tailwindColors from 'tailwindcss/colors'
+import PanelButtons from './PanelButtons.vue'
+import SettingsPanel from './SettingsPanel.vue'
+import StatisticPanel from './StatisticPanel.vue'
+import CategoryPanel from './CategoryPanel.vue'
+import { RightPanelModes } from '@types'
+
+const userSettings = useUserSettingsStore()
+
+const rightPanelSettings = reactive<{
+	isOpened: boolean
+	mode: RightPanelModes
+}>({
+	isOpened: false,
+	mode: 'statistic'
+})
+
+function onClick(mode: RightPanelModes) {
+	if (rightPanelSettings.mode === mode) {
+		rightPanelSettings.isOpened = !rightPanelSettings.isOpened
+		return
+	}
+
+	rightPanelSettings.mode = mode
+	rightPanelSettings.isOpened = true
+}
+</script>
+
+<template>
+	<div
+		class="element absolute h-full transition-all duration-700 -translate-x-[450px] ease-in-out flex"
+		:class="rightPanelSettings.isOpened ? 'translate-x-0' : ''"
+		:style="{
+			'--right-panel-color-200':
+				tailwindColors[userSettings.colors[userSettings.settings.selectedMode]][
+					'200'
+				],
+			'--right-panel-color-300':
+				tailwindColors[userSettings.colors[userSettings.settings.selectedMode]][
+					'300'
+				],
+			'--right-panel-color-950':
+				tailwindColors[userSettings.colors[userSettings.settings.selectedMode]][
+					'950'
+				]
+		}"
+	>
+		<div
+			class="w-[450px] z-10 bg-white border-r-[2px] border-[--right-panel-color-300] shadow"
+		>
+			<StatisticPanel v-if="rightPanelSettings.mode === 'statistic'" />
+			<SettingsPanel v-if="rightPanelSettings.mode === 'settings'" />
+			<CategoryPanel v-if="rightPanelSettings.mode === 'category'" />
+		</div>
+
+		<PanelButtons
+			:isOpened="rightPanelSettings.isOpened"
+			:mode="rightPanelSettings.mode"
+			@click="onClick"
+		/>
+	</div>
+</template>
