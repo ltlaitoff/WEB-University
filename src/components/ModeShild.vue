@@ -11,9 +11,9 @@ const props = defineProps<{
 const userSettings = useUserSettingsStore()
 
 const textData: Record<Mode, string> = {
-	pomodoro: 'Focus',
-	short: 'Short break',
-	long: 'Long break'
+	[Mode.pomodoro]: 'Focus',
+	[Mode.short]: 'Short break',
+	[Mode.long]: 'Long break'
 }
 </script>
 

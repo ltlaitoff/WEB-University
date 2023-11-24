@@ -18,13 +18,13 @@ const currentApproach = ref(1)
 const selectedMode = computed(() => userSettings.selectedMode)
 
 const TIMER_POMODORO_MODE = computed(
-	() => userSettings.times.pomodoro * 60 * 1000
+	() => userSettings.times[Mode.pomodoro] * 60 * 1000
 )
 const TIMER_SHORT_BREAK_MODE = computed(
-	() => userSettings.times.short * 60 * 1000
+	() => userSettings.times[Mode.short] * 60 * 1000
 )
 const TIMER_LONG_BREAK_MODE = computed(
-	() => userSettings.times.long * 60 * 1000
+	() => userSettings.times[Mode.long] * 60 * 1000
 )
 
 const timer = useTimer(Date.now() + TIMER_POMODORO_MODE.value, false)
@@ -45,9 +45,9 @@ function onPlayOrPauseClick() {
 
 function onFastForwardClick() {
 	const currentTimer =
-		selectedMode.value === 'pomodoro'
+		selectedMode.value === Mode.pomodoro
 			? TIMER_POMODORO_MODE
-			: selectedMode.value === 'short'
+			: selectedMode.value === Mode.short
 			? TIMER_SHORT_BREAK_MODE
 			: TIMER_LONG_BREAK_MODE
 
@@ -63,10 +63,10 @@ function onFastForwardClick() {
 onMounted(() => {
 	watchEffect(async () => {
 		if (timer.isExpired.value) {
-			if (selectedMode.value !== 'pomodoro') {
+			if (selectedMode.value !== Mode.pomodoro) {
 				currentApproach.value++
 
-				if (selectedMode.value === 'long') {
+				if (selectedMode.value === Mode.short) {
 					currentApproach.value = 1
 
 					statisticStore.add({
@@ -86,7 +86,7 @@ onMounted(() => {
 					})
 				}
 
-				onSelectedModeChange('pomodoro')
+				onSelectedModeChange(Mode.pomodoro)
 				return
 			}
 
@@ -99,9 +99,9 @@ onMounted(() => {
 			})
 
 			if (currentApproach.value >= 4) {
-				onSelectedModeChange('long')
+				onSelectedModeChange(Mode.long)
 			} else {
-				onSelectedModeChange('short')
+				onSelectedModeChange(Mode.short)
 			}
 		}
 	})
@@ -113,15 +113,15 @@ function onSelectedModeChange(id: ModeItem['id']) {
 }
 
 function resetTimer(mode: Mode = selectedMode.value) {
-	if (mode === 'pomodoro') {
+	if (mode === Mode.pomodoro) {
 		timer.restart(Date.now() + TIMER_POMODORO_MODE.value, false)
 	}
 
-	if (mode === 'short') {
+	if (mode === Mode.short) {
 		timer.restart(Date.now() + TIMER_SHORT_BREAK_MODE.value, false)
 	}
 
-	if (mode === 'long') {
+	if (mode === Mode.long) {
 		timer.restart(Date.now() + TIMER_LONG_BREAK_MODE.value, false)
 	}
 }

@@ -16,16 +16,16 @@ export const useUserSettingsStore = defineStore('settings', {
 		return {
 			settings: {
 				colors: {
-					pomodoro: 'blue',
-					short: 'purple',
-					long: 'red'
+					[Mode.pomodoro]: 'blue',
+					[Mode.short]: 'purple',
+					[Mode.long]: 'red'
 				},
 				times: {
-					pomodoro: 3 / 60,
-					short: 4 / 60,
-					long: 5 / 60
+					[Mode.pomodoro]: 3 / 60,
+					[Mode.short]: 4 / 60,
+					[Mode.long]: 5 / 60
 				},
-				selectedMode: 'pomodoro',
+				selectedMode: Mode.pomodoro,
 				selectedCategory: {
 					_id: '0',
 					color: 'red',

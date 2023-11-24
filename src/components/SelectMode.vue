@@ -30,17 +30,17 @@ const selectedColor = computed({
 
 const colorsData: ModeItem[] = [
 	{
-		id: 'pomodoro',
+		id: Mode.pomodoro,
 		title: 'Focus',
 		icon: BrainIcon
 	},
 	{
-		id: 'short',
+		id: Mode.short,
 		title: 'Short break',
 		icon: CupIcon
 	},
 	{
-		id: 'long',
+		id: Mode.long,
 		title: 'Long break',
 		icon: BedIcon
 	}
