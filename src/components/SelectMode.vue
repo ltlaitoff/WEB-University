@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import BrainIcon from '../assets/icons/brain.svg'
-import BedIcon from '../assets/icons/bed.svg'
-import CupIcon from '../assets/icons/cup.svg'
-import { ModeItem } from '../types/ModeItem'
+import BrainIcon from '@assets/icons/brain.svg'
+import BedIcon from '@assets/icons/bed.svg'
+import CupIcon from '@assets/icons/cup.svg'
+import { ModeItem, Mode, Colors } from '@types'
+import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 
 import { computed, ref } from 'vue'
+import tailwindColors from 'tailwindcss/colors'
 
-const props = defineProps(['modelValue'])
-const emit = defineEmits(['update:modelValue'])
+const props = defineProps<{
+	modelValue: Mode
+	colors: Record<Mode, Colors>
+}>()
+
+const emit = defineEmits<{
+	(e: 'update:modelValue', value: Mode): void
+}>()
 
 const selectedColor = computed({
 	get() {
@@ -19,34 +27,21 @@ const selectedColor = computed({
 	}
 })
 
-// const selectedColor = ref(colorsData[0])
 const colorsData: ModeItem[] = [
 	{
 		id: 'pomodoro',
-		title: 'Pomodoro',
-		icon: BrainIcon,
-		color: 'blue',
-		additionalStyles:
-			'border-blue-950 bg-blue-100  text-blue-950 hover:bg-blue-200',
-		additionalStylesSelected: 'border-blue-950'
+		title: 'Focus',
+		icon: BrainIcon
 	},
 	{
 		id: 'short',
 		title: 'Short break',
-		icon: CupIcon,
-		color: 'green',
-		additionalStyles:
-			'border-green-950 bg-green-100  text-green-950 hover:bg-green-200',
-		additionalStylesSelected: 'border-green-950'
+		icon: CupIcon
 	},
 	{
 		id: 'long',
 		title: 'Long break',
-		icon: BedIcon,
-		color: 'red',
-		additionalStyles:
-			'border-red-950 bg-red-100  text-red-950 hover:bg-red-200',
-		additionalStylesSelected: 'border-red-950'
+		icon: BedIcon
 	}
 ]
 
@@ -60,7 +55,7 @@ function toggleSelect() {
 
 const selectOpen = ref(false)
 
-function changeSelectedColor(data: any) {
+function changeSelectedColor(data: ModeItem) {
 	selectedColor.value = data
 	selectOpen.value = false
 }
@@ -72,7 +67,19 @@ function changeSelectedColor(data: any) {
 		v-click-out-side="hideSelect"
 	>
 		<button
-			:class="`rounded-full border flex items-center gap-x-2 px-4 py-2 ${selectedColor.additionalStylesSelected} ${selectedColor.additionalStyles} cursor-pointer transition-all duration-100`"
+			class="item-colors rounded-full border flex items-center gap-x-2 px-4 py-2 item-colors-selected cursor-pointer transition-all duration-100"
+			:style="{
+				'--select-mode-bg':
+					tailwindColors[props.colors[selectedColor.id]]['100'],
+				'--select-mode-border-color':
+					tailwindColors[props.colors[selectedColor.id]]['950'],
+				'--select-mode-color':
+					tailwindColors[props.colors[selectedColor.id]]['950'],
+				'--select-mode-bg-hover':
+					tailwindColors[props.colors[selectedColor.id]]['200'],
+				'--select-mode-selected-border-color':
+					tailwindColors[props.colors[selectedColor.id]]['950']
+			}"
 			@click="toggleSelect"
 		>
 			<component
@@ -84,13 +91,23 @@ function changeSelectedColor(data: any) {
 
 		<div
 			v-if="selectOpen"
-			class="absolute top-10 mt-2 flex flex-col rounded-xl overflow-hidden border border-black"
+			class="absolute top-10 mt-2 flex flex-col rounded-xl overflow-hidden border border-black z-10"
 		>
 			<button
 				v-for="item in colorsData"
 				:key="item.title"
-				:class="`flex items-center gap-x-2 px-4 py-2 ${item.additionalStyles} cursor-pointer transition-all duration-100`"
+				class="item-colors flex items-center gap-x-2 px-4 py-2 cursor-pointer transition-all duration-100"
 				@click="changeSelectedColor(item)"
+				:style="{
+					'--select-mode-bg': tailwindColors[props.colors[item.id]]['100'],
+					'--select-mode-border-color':
+						tailwindColors[props.colors[item.id]]['950'],
+					'--select-mode-color': tailwindColors[props.colors[item.id]]['950'],
+					'--select-mode-bg-hover':
+						tailwindColors[props.colors[item.id]]['200'],
+					'--select-mode-selected-border-color':
+						tailwindColors[props.colors[item.id]]['950']
+				}"
 			>
 				<component
 					:is="item.icon"
@@ -102,3 +119,19 @@ function changeSelectedColor(data: any) {
 		</div>
 	</div>
 </template>
+
+<style scoped>
+.item-colors {
+	background: var(--select-mode-bg);
+	border-color: var(--select-mode-border-color);
+	color: var(--select-mode-color);
+}
+
+.item-colors:hover {
+	background: var(--select-mode-bg-hover);
+}
+
+.item-colors-selected {
+	border-color: var(--select-mode-selected-border-color);
+}
+</style>
