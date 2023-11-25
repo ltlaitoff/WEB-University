@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { RightPanelModes } from '@types'
+import { LeftPanelModes } from '@types'
 
 const props = defineProps<{
 	isOpened: boolean
-	mode: RightPanelModes
+	mode: LeftPanelModes
 }>()
 
 const emits = defineEmits<{
-	(event: 'click', value: RightPanelModes): void
+	(event: 'click', value: LeftPanelModes): void
 }>()
 
 const data: {
 	title: string
-	key: RightPanelModes
+	key: LeftPanelModes
 }[] = [
 	{
 		title: 'Settings',

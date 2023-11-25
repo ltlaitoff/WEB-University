@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import tailwindColors from 'tailwindcss/colors'
 
-import RightPanel from '@components/RightPanel/RightPanel.vue'
+import LeftPanel from '@components/LeftPanel/LeftPanel.vue'
 import HomePage from '@pages/HomePage.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
@@ -10,7 +10,7 @@ const userSettings = useUserSettingsStore()
 
 <template>
 	<main class="main font-['Roboto'] w-full h-full min-h-screen pb-[15vh]">
-		<RightPanel />
+		<LeftPanel />
 
 		<div class="min-h-full flex items-center justify-center">
 			<HomePage />
