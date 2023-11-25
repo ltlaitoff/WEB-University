@@ -11,6 +11,7 @@ interface UserSettingsStore {
 		selectedCategory: Category
 		approachesCount: number
 	}
+	activeCompletedPomodoro: boolean
 }
 
 export const useUserSettingsStore = defineStore('settings', {
@@ -35,7 +36,8 @@ export const useUserSettingsStore = defineStore('settings', {
 					name: 'Pomodoro'
 				},
 				approachesCount: 4
-			}
+			},
+			activeCompletedPomodoro: false
 		}
 	},
 	getters: {

@@ -32,7 +32,25 @@ const timer = useTimer(Date.now() + TIMER_POMODORO_MODE.value, false)
 resetTimer()
 
 // TODO: 50/50
-userSettings.$subscribe(() => resetTimer())
+userSettings.$subscribe(data => {
+	if (
+		userSettings.activeCompletedPomodoro &&
+		data &&
+		data.events &&
+		// @ts-expect-error All good
+		data.events.key !== undefined &&
+		// @ts-expect-error All good
+		data.events.key === 'selectedMode' &&
+		// @ts-expect-error All good
+		data.events.newValue === Mode.pomodoro
+	) {
+		incrementAndResetApproach()
+
+		userSettings.activeCompletedPomodoro = false
+	}
+
+	resetTimer()
+})
 
 function onPlayOrPauseClick() {
 	if (timer.isRunning.value) {
@@ -53,6 +71,10 @@ function onFastForwardClick() {
 
 	timer.restart(Date.now() + currentTimer.value, false)
 
+	incrementAndResetApproach()
+}
+
+function incrementAndResetApproach() {
 	currentApproach.value++
 
 	if (currentApproach.value > userSettings.settings.approachesCount) {
@@ -64,11 +86,7 @@ onMounted(() => {
 	watchEffect(async () => {
 		if (timer.isExpired.value) {
 			if (selectedMode.value !== Mode.pomodoro) {
-				currentApproach.value++
-
 				if (selectedMode.value === Mode.short) {
-					currentApproach.value = 1
-
 					statisticStore.add({
 						mode: selectedMode.value,
 						count: TIMER_LONG_BREAK_MODE.value,
@@ -85,6 +103,8 @@ onMounted(() => {
 				onSelectedModeChange(Mode.pomodoro)
 				return
 			}
+
+			userSettings.activeCompletedPomodoro = true
 
 			statisticStore.add({
 				mode: selectedMode.value,
