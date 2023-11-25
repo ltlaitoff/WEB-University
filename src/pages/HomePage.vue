@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import { useTimer } from 'vue-timer-hook'
 
 import CategorySelect from '@components/CategorySelect.vue'
@@ -12,8 +12,6 @@ import { Mode, ModeItem } from '@types'
 
 const userSettings = useUserSettingsStore()
 const statisticStore = useStatistic()
-
-const currentApproach = ref(1)
 
 const selectedMode = computed(() => userSettings.selectedMode)
 
@@ -75,10 +73,10 @@ function onFastForwardClick() {
 }
 
 function incrementAndResetApproach() {
-	currentApproach.value++
+	userSettings.currentApproach++
 
-	if (currentApproach.value > userSettings.settings.approachesCount) {
-		currentApproach.value = 1
+	if (userSettings.currentApproach > userSettings.settings.approachesCount) {
+		userSettings.currentApproach = 1
 	}
 }
 
@@ -112,7 +110,7 @@ onMounted(() => {
 				category: userSettings.settings.selectedCategory
 			})
 
-			if (currentApproach.value >= 4) {
+			if (userSettings.currentApproach >= 4) {
 				onSelectedModeChange(Mode.long)
 			} else {
 				onSelectedModeChange(Mode.short)
@@ -159,7 +157,9 @@ function resetTimer(mode: Mode = selectedMode.value) {
 			/>
 
 			<div class="mt-3 text-lg flex justify-center text-">
-				<span class="text-blue-800">{{ currentApproach }}</span>
+				<span class="text-blue-800">
+					{{ userSettings.currentApproach }}
+				</span>
 				<span class="text-blue-950">/</span>
 				<span class="text-blue-950">
 					{{ userSettings.settings.approachesCount }}
