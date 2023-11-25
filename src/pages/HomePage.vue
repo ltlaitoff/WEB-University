@@ -55,7 +55,7 @@ function onFastForwardClick() {
 
 	currentApproach.value++
 
-	if (currentApproach.value > 4) {
+	if (currentApproach.value > userSettings.settings.approachesCount) {
 		currentApproach.value = 1
 	}
 }
@@ -140,7 +140,10 @@ function resetTimer(mode: Mode = selectedMode.value) {
 
 			<div class="mt-3 text-lg flex justify-center text-">
 				<span class="text-blue-800">{{ currentApproach }}</span>
-				<span class="text-blue-950">/4</span>
+				<span class="text-blue-950">/</span>
+				<span class="text-blue-950">
+					{{ userSettings.settings.approachesCount }}
+				</span>
 			</div>
 		</div>
 

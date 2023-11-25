@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 
+import { approachesLimits } from '@constants/approachesLimits'
 import { Category, Colors, Mode } from '@types'
 
 interface UserSettingsStore {
@@ -8,6 +9,7 @@ interface UserSettingsStore {
 		times: Record<Mode, number>
 		selectedMode: Mode
 		selectedCategory: Category
+		approachesCount: number
 	}
 }
 
@@ -31,7 +33,8 @@ export const useUserSettingsStore = defineStore('settings', {
 					color: 'red',
 					mode: 'time',
 					name: 'Pomodoro'
-				}
+				},
+				approachesCount: 4
 			}
 		}
 	},
@@ -46,6 +49,11 @@ export const useUserSettingsStore = defineStore('settings', {
 		},
 		setSelectedMode(mode: Mode) {
 			this.settings.selectedMode = mode
+		},
+		setApproachesCount(value: number) {
+			if (value > approachesLimits.max || value < approachesLimits.min) return
+
+			this.settings.approachesCount = value
 		}
 	},
 	persist: true

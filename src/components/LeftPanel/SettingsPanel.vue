@@ -36,6 +36,15 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 						@change="value => userSettings.setColor(mode, value)"
 					/>
 				</div>
+				<div class="">
+					<div class="px-4 text-lg">Approaches count:</div>
+					<NumberInput
+						class="ml-1 mt-1"
+						v-model="userSettings.settings.approachesCount"
+						:max="100"
+						:min="1"
+					/>
+				</div>
 			</div>
 		</div>
 	</div>
