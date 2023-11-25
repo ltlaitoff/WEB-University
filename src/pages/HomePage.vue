@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watchEffect } from 'vue'
-import { useTimer } from 'vue-timer-hook'
 
+import { useTimer } from '@/packages/timer'
 import CategorySelect from '@components/CategorySelect.vue'
 import ControlButtons from '@components/ControlButtons.vue'
 import SelectMode from '@components/SelectMode.vue'
