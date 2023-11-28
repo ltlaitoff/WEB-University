@@ -54,7 +54,7 @@ function hideSelect() {
 
 		<div
 			v-if="opened"
-			class="absolute top-10 mt-2 flex flex-col rounded-xl overflow-hidden border border-black z-10"
+			class="absolute max-h-[200px] overflow-scroll top-10 mt-2 flex flex-col rounded-xl overflow-hidden border border-black z-10"
 		>
 			<button
 				v-for="item in categoryStore.categories"

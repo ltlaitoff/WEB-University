@@ -11,7 +11,9 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 </script>
 
 <template>
-	<div class="pl-6 pr-6 py-6 w-[450px] h-full flex flex-col gap-y-2">
+	<div
+		class="pl-6 pr-6 py-6 w-[450px] max-md:pb-6 max-md:w-full h-full flex flex-col gap-y-2 overflow-y-scroll"
+	>
 		<div class="text-center text-2xl">Settings</div>
 
 		<div class="flex flex-col gap-y-10">
