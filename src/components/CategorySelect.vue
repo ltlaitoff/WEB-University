@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 import tailwindColors from 'tailwindcss/colors'
 
 import { useCategoryStore } from '@store/categoriesStore'
@@ -37,7 +36,7 @@ function hideSelect() {
 <template>
 	<div
 		class="flex justify-center relative"
-		v-click-out-side="hideSelect"
+		v-close-modal="hideSelect"
 	>
 		<button
 			class="item rounded-full inline-flex gap-x-2 justify-center items-center px-4 py-2 hover:bg-blue-100 hover:cursor-pointer transition-all duration-200"

@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@mahdikhashan/vue3-click-outside':
-    specifier: ^0.1.2
-    version: 0.1.2(vue@3.3.7)
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.2.2)(vue@3.3.7)
@@ -516,14 +513,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
-
-  /@mahdikhashan/vue3-click-outside@0.1.2(vue@3.3.7):
-    resolution: {integrity: sha512-8tJI5fvjemU4bG37EcxVvuYZJj6CHj3cDx1aAiYcOD/pzU5zQ7+BoJoXyI2Fx3fNH8Nwt+iQ1GsO4HRIUaqChQ==}
-    peerDependencies:
-      vue: 3.x.x
-    dependencies:
-      vue: 3.3.7(typescript@5.2.2)
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

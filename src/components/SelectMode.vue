@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 import tailwindColors from 'tailwindcss/colors'
 
 import BedIcon from '@assets/icons/bed.svg'
@@ -65,7 +64,7 @@ function changeSelectedColor(data: ModeItem) {
 <template>
 	<div
 		class="relative whitespace-nowrap"
-		v-click-out-side="hideSelect"
+		v-close-modal="hideSelect"
 	>
 		<button
 			class="item-colors rounded-full border flex items-center gap-x-2 px-4 py-2 item-colors-selected cursor-pointer transition-all duration-100"

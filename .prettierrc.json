@@ -14,7 +14,7 @@
 	"importOrder": [
 		"^vue(.*)",
 		"<THIRD_PARTY_MODULES>",
-		"@(assets|components|constants|pages|store|types|utils|/)",
+		"@(assets|components|constants|pages|store|types|utils|directives|/)",
 		"^[./]"
 	],
 	"importOrderSeparation": true,
