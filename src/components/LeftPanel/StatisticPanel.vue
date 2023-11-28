@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { useStatistic } from '@store/statisticStore'
-import ModeShild from '@components/ModeShild.vue'
-import TrashIcon from '@assets/icons/trash.svg'
 import { computed } from 'vue'
+
 import tailwindColors from 'tailwindcss/colors'
+
+import TrashIcon from '@assets/icons/trash.svg'
+import ModeShild from '@components/ModeShild.vue'
+import { useStatistic } from '@store/statisticStore'
 
 const statisticStore = useStatistic()
 
 const statisticForOutput = computed(() => {
+	// Move to helpers
 	return statisticStore.statistic.toSorted((a, b) => {
 		return Number(b.date) - Number(a.date)
 	})
@@ -32,7 +35,7 @@ const statisticForOutput = computed(() => {
 					</span>
 
 					<span class="">
-						{{ new Date(Number(item.date)).toLocaleString('en-GB') }}
+						{{ new Date(item.date).toLocaleString('en-GB') }}
 					</span>
 				</div>
 

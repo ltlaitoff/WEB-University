@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
 import tailwindColors from 'tailwindcss/colors'
-import { useCategoryStore } from '../store/categoriesStore'
-import { Category } from '../types/Category'
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
+
+import { useCategoryStore } from '@store/categoriesStore'
+import { Category } from '@types'
 
 const props = defineProps<{
 	modelValue: Category
@@ -19,7 +20,12 @@ const opened = ref(false)
 
 function onChange(category: Category) {
 	emit('update:modelValue', category)
+	// TODO: Add close on escape
 	opened.value = false
+}
+
+function toggleOpened() {
+	opened.value = !opened.value
 }
 
 function hideSelect() {
@@ -30,7 +36,7 @@ function hideSelect() {
 <template>
 	<div
 		class="flex justify-center relative"
-		v-click-out-side="hideSelect"
+		v-close-modal="hideSelect"
 	>
 		<button
 			class="item rounded-full inline-flex gap-x-2 justify-center items-center px-4 py-2 hover:bg-blue-100 hover:cursor-pointer transition-all duration-200"
@@ -40,7 +46,7 @@ function hideSelect() {
 				'--category-select-bg-hover':
 					tailwindColors[props.modelValue.color]['100']
 			}"
-			@click="opened = !opened"
+			@click="toggleOpened"
 		>
 			<div class="circle w-3 h-3 rounded-full item-colors"></div>
 			<div class="">{{ props.modelValue.name }}</div>
@@ -48,7 +54,7 @@ function hideSelect() {
 
 		<div
 			v-if="opened"
-			class="absolute top-10 mt-2 flex flex-col rounded-xl overflow-hidden border border-black z-10"
+			class="absolute max-h-[200px] overflow-scroll top-10 mt-2 flex flex-col rounded-xl overflow-hidden border border-black z-10"
 		>
 			<button
 				v-for="item in categoryStore.categories"

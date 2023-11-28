@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import RightPanel from './components/RightPanel/RightPanel.vue'
 import tailwindColors from 'tailwindcss/colors'
-import HomePage from './pages/HomePage.vue'
+
+import LeftPanel from '@components/LeftPanel/LeftPanel.vue'
+import HomePage from '@pages/HomePage.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
 const userSettings = useUserSettingsStore()
-console.log(
-	tailwindColors[userSettings.colors[userSettings.settings.selectedMode]]
-)
 </script>
 
 <template>
 	<main class="main font-['Roboto'] w-full h-full min-h-screen pb-[15vh]">
-		<RightPanel />
+		<LeftPanel />
 
 		<div class="min-h-full flex items-center justify-center">
 			<HomePage />

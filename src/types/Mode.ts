@@ -1,1 +1,5 @@
-export type Mode = 'pomodoro' | 'short' | 'long'
+export enum Mode {
+	'pomodoro' = 'POMODORO',
+	'short' = 'SHORT',
+	'long' = 'LONG'
+}

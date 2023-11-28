@@ -1,40 +1,56 @@
 <script setup lang="ts">
-import SelectMode from '@components/SelectMode.vue'
-import ControlButtons from '@components/ControlButtons.vue'
-import TimerTime from '@components/TimerTime.vue'
-import { useUserSettingsStore } from '@store/userSettingsStore'
-import { watchEffect, onMounted, ref, computed } from 'vue'
-import { useTimer } from 'vue-timer-hook'
-import { ModeItem } from '../types/ModeItem'
-import { useStatistic } from '@store/statisticStore'
+import { computed, onMounted, watchEffect } from 'vue'
+
+import { useTimer } from '@/packages/timer'
 import CategorySelect from '@components/CategorySelect.vue'
-import { Mode } from '../types/Mode'
+import ControlButtons from '@components/ControlButtons.vue'
+import SelectMode from '@components/SelectMode.vue'
+import TimerTime from '@components/TimerTime.vue'
+import { useStatistic } from '@store/statisticStore'
+import { useUserSettingsStore } from '@store/userSettingsStore'
+import { Mode, ModeItem } from '@types'
 
 const userSettings = useUserSettingsStore()
 const statisticStore = useStatistic()
 
-const currentApproach = ref(1)
-
 const selectedMode = computed(() => userSettings.selectedMode)
 
 const TIMER_POMODORO_MODE = computed(
-	() => userSettings.times.pomodoro * 60 * 1000
+	() => userSettings.times[Mode.pomodoro] * 60 * 1000
 )
 const TIMER_SHORT_BREAK_MODE = computed(
-	() => userSettings.times.short * 60 * 1000
+	() => userSettings.times[Mode.short] * 60 * 1000
 )
 const TIMER_LONG_BREAK_MODE = computed(
-	() => userSettings.times.long * 60 * 1000
+	() => userSettings.times[Mode.long] * 60 * 1000
 )
 
 const timer = useTimer(Date.now() + TIMER_POMODORO_MODE.value, false)
+// TODO: Remove / move to mounted
 resetTimer()
 
-userSettings.$subscribe(() => resetTimer())
+// TODO: 50/50
+userSettings.$subscribe(data => {
+	if (
+		userSettings.activeCompletedPomodoro &&
+		data &&
+		data.events &&
+		// @ts-expect-error All good
+		data.events.key !== undefined &&
+		// @ts-expect-error All good
+		data.events.key === 'selectedMode' &&
+		// @ts-expect-error All good
+		data.events.newValue === Mode.pomodoro
+	) {
+		incrementAndResetApproach()
+
+		userSettings.activeCompletedPomodoro = false
+	}
+
+	resetTimer()
+})
 
 function onPlayOrPauseClick() {
-	console.log(timer.isRunning.value)
-
 	if (timer.isRunning.value) {
 		timer.pause()
 		return
@@ -45,63 +61,59 @@ function onPlayOrPauseClick() {
 
 function onFastForwardClick() {
 	const currentTimer =
-		selectedMode.value === 'pomodoro'
+		selectedMode.value === Mode.pomodoro
 			? TIMER_POMODORO_MODE
-			: selectedMode.value === 'short'
+			: selectedMode.value === Mode.short
 			? TIMER_SHORT_BREAK_MODE
 			: TIMER_LONG_BREAK_MODE
 
 	timer.restart(Date.now() + currentTimer.value, false)
 
-	currentApproach.value++
+	incrementAndResetApproach()
+}
 
-	if (currentApproach.value > 4) {
-		currentApproach.value = 1
+function incrementAndResetApproach() {
+	userSettings.currentApproach++
+
+	if (userSettings.currentApproach > userSettings.settings.approachesCount) {
+		userSettings.currentApproach = 1
 	}
 }
 
 onMounted(() => {
 	watchEffect(async () => {
 		if (timer.isExpired.value) {
-			if (selectedMode.value !== 'pomodoro') {
-				currentApproach.value++
-
-				if (selectedMode.value === 'long') {
-					currentApproach.value = 1
-
+			if (selectedMode.value !== Mode.pomodoro) {
+				if (selectedMode.value === Mode.short) {
 					statisticStore.add({
-						_id: String(Date.now()),
-						date: String(Date.now() - TIMER_LONG_BREAK_MODE.value),
 						mode: selectedMode.value,
 						count: TIMER_LONG_BREAK_MODE.value,
 						category: userSettings.settings.selectedCategory
 					})
 				} else {
 					statisticStore.add({
-						_id: String(Date.now()),
-						date: String(Date.now() - TIMER_SHORT_BREAK_MODE.value),
 						mode: selectedMode.value,
 						count: TIMER_SHORT_BREAK_MODE.value,
 						category: userSettings.settings.selectedCategory
 					})
 				}
 
-				onSelectedModeChange('pomodoro')
+				onSelectedModeChange(Mode.pomodoro)
 				return
 			}
 
+			userSettings.activeCompletedPomodoro = true
+
 			statisticStore.add({
-				_id: String(Date.now()),
-				date: String(Date.now() - TIMER_POMODORO_MODE.value),
 				mode: selectedMode.value,
 				count: TIMER_POMODORO_MODE.value,
 				category: userSettings.settings.selectedCategory
 			})
 
-			if (currentApproach.value >= 4) {
-				onSelectedModeChange('long')
+			if (userSettings.currentApproach >= 4) {
+				onSelectedModeChange(Mode.long)
 			} else {
-				onSelectedModeChange('short')
+				onSelectedModeChange(Mode.short)
 			}
 		}
 	})
@@ -113,15 +125,15 @@ function onSelectedModeChange(id: ModeItem['id']) {
 }
 
 function resetTimer(mode: Mode = selectedMode.value) {
-	if (mode === 'pomodoro') {
+	if (mode === Mode.pomodoro) {
 		timer.restart(Date.now() + TIMER_POMODORO_MODE.value, false)
 	}
 
-	if (mode === 'short') {
+	if (mode === Mode.short) {
 		timer.restart(Date.now() + TIMER_SHORT_BREAK_MODE.value, false)
 	}
 
-	if (mode === 'long') {
+	if (mode === Mode.long) {
 		timer.restart(Date.now() + TIMER_LONG_BREAK_MODE.value, false)
 	}
 }
@@ -145,8 +157,13 @@ function resetTimer(mode: Mode = selectedMode.value) {
 			/>
 
 			<div class="mt-3 text-lg flex justify-center text-">
-				<span class="text-blue-800">{{ currentApproach }}</span>
-				<span class="text-blue-950">/4</span>
+				<span class="text-blue-800">
+					{{ userSettings.currentApproach }}
+				</span>
+				<span class="text-blue-950">/</span>
+				<span class="text-blue-950">
+					{{ userSettings.settings.approachesCount }}
+				</span>
 			</div>
 		</div>
 

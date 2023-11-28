@@ -15,18 +15,24 @@
 		"jsx": "preserve",
 		"paths": {
 			/* Imports like '@components/App' */
-
 			"@assets/*": ["./src/assets/*"],
 			"@components/*": ["./src/components/*"],
+			"@constants/*": ["./src/constants/*"],
+			"@pages/*": ["./src/pages/*"],
 			"@store/*": ["./src/store/*"],
 			"@types/*": ["./src/types/*"],
+			"@utils/*": ["./src/utils/*"],
+			"@directives/*": ["./src/directives/*"],
 
 			/* Imports like '@constants' */
 			"@assets": ["./src/assets"],
 			"@components": ["./src/components"],
+			"@constants": ["./src/constants"],
+			"@pages": ["./src/pages"],
 			"@store": ["./src/store"],
 			"@types": ["./src/types"],
-
+			"@utils": ["./src/utils"],
+			"@directives": ["./src/directives"],
 			"@/*": ["./src/*"]
 		},
 		/* Linting */

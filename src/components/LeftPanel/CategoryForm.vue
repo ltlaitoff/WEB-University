@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+
 import ColorPicker from '@components/ColorPicker.vue'
 import { Colors } from '@types'
-import { useCategoryStore } from '../../store/categoriesStore'
+import { AddNewCategory } from '@types'
 
-const categoriesStore = useCategoryStore()
 const name = ref('')
 const color = ref<Colors>('fuchsia')
 
 const emits = defineEmits<{
 	(event: 'close'): void
+	(event: 'submit', payload: AddNewCategory): void
 }>()
 
 const touched = ref(false)
@@ -18,18 +19,26 @@ function submit(e: Event) {
 	e.preventDefault()
 
 	if (name.value.length === 0) {
-		touched.value = true
+		onTouch()
 		return
 	}
 
-	categoriesStore.add({
-		_id: String(Date.now()),
+	emits('submit', {
 		name: name.value,
-		mode: 'time',
 		color: color.value
 	})
+}
 
-	emits('close')
+const allowShowError = computed(() => {
+	return touched.value && name.value.length === 0
+})
+
+function onTouch() {
+	touched.value = true
+}
+
+function changeColor(newColor: Colors) {
+	color.value = newColor
 }
 </script>
 
@@ -43,11 +52,11 @@ function submit(e: Event) {
 			<input
 				class="w-full border border-slate-400 px-2 py-1 rounded-md"
 				:class="{
-					'border-red-400': touched && name.length === 0
+					'border-red-400': allowShowError
 				}"
 				type="text"
 				v-model="name"
-				@input="() => (touched = true)"
+				@input="onTouch"
 			/>
 		</label>
 
@@ -55,12 +64,12 @@ function submit(e: Event) {
 			<ColorPicker
 				size="sm"
 				:value="color"
-				@change="value => (color = value)"
+				@change="changeColor"
 			/>
 		</label>
 
 		<div
-			v-if="touched && name.length === 0"
+			v-if="allowShowError"
 			class="text-red-600 text-center"
 		>
 			Not valid name!
@@ -73,5 +82,3 @@ function submit(e: Event) {
 		</button>
 	</form>
 </template>
-
-<style scoped></style>

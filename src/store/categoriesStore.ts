@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { Category } from '@types'
+
+import { AddNewCategory, Category } from '@types'
 
 interface CategoryStore {
 	categories: Category[]
@@ -18,8 +19,12 @@ export const useCategoryStore = defineStore('category', {
 	}),
 
 	actions: {
-		add(categoriesItem: Category) {
-			this.categories.push(categoriesItem)
+		add(payload: AddNewCategory) {
+			this.categories.push({
+				_id: String(new Date(Date.now()).getTime()),
+				mode: 'time',
+				...payload
+			})
 		},
 
 		delete(categoriesItem: Category) {

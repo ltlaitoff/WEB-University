@@ -1,34 +1,27 @@
 <script setup lang="ts">
 import traiwindColors from 'tailwindcss/colors'
-import { Colors } from '../types/Colors'
 
-const props = defineProps<{
-	value: Colors
-	size?: 'sm' | 'md'
-}>()
+import { tailwindColorsIgnore } from '@constants/tailwindColorsIgnore'
+import { Colors } from '@types'
+
+const props = withDefaults(
+	defineProps<{
+		value: Colors
+		size?: 'sm' | 'md'
+	}>(),
+	{
+		size: 'md'
+	}
+)
 
 const emits = defineEmits<{
 	(event: 'change', value: Colors): void
 }>()
 
-const ignore = [
-	'inherit',
-	'current',
-	'transparent',
-	'black',
-	'white',
-	'lightBlue',
-	'warmGray',
-	'trueGray',
-	'coolGray',
-	'blueGray'
-]
-
-const colorsForOutput = Object.entries(traiwindColors).filter(
-	([key, value]) => {
-		return !ignore.includes(key)
-	}
-) as [Colors, any][]
+const colorsForOutput = Object.entries(traiwindColors).filter(([key]) => {
+	return !tailwindColorsIgnore.includes(key)
+	// eslint-disable-next-line
+}) as [Colors, any][]
 
 function onClick(value: Colors) {
 	emits('change', value)

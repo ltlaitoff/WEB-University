@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import BrainIcon from '@assets/icons/brain.svg'
-import BedIcon from '@assets/icons/bed.svg'
-import CupIcon from '@assets/icons/cup.svg'
-import { ModeItem, Mode, Colors } from '@types'
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
-
 import { computed, ref } from 'vue'
+
 import tailwindColors from 'tailwindcss/colors'
+
+import BedIcon from '@assets/icons/bed.svg'
+import BrainIcon from '@assets/icons/brain.svg'
+import CupIcon from '@assets/icons/cup.svg'
+import { Colors, Mode, ModeItem } from '@types'
 
 const props = defineProps<{
 	modelValue: Mode
@@ -29,17 +29,17 @@ const selectedColor = computed({
 
 const colorsData: ModeItem[] = [
 	{
-		id: 'pomodoro',
+		id: Mode.pomodoro,
 		title: 'Focus',
 		icon: BrainIcon
 	},
 	{
-		id: 'short',
+		id: Mode.short,
 		title: 'Short break',
 		icon: CupIcon
 	},
 	{
-		id: 'long',
+		id: Mode.long,
 		title: 'Long break',
 		icon: BedIcon
 	}
@@ -64,7 +64,7 @@ function changeSelectedColor(data: ModeItem) {
 <template>
 	<div
 		class="relative whitespace-nowrap"
-		v-click-out-side="hideSelect"
+		v-close-modal="hideSelect"
 	>
 		<button
 			class="item-colors rounded-full border flex items-center gap-x-2 px-4 py-2 item-colors-selected cursor-pointer transition-all duration-100"

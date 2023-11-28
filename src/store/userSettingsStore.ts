@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { Mode } from '../types/Mode'
-import { Colors } from '../types/Colors'
-import { Category } from '../types/Category'
+
+import { approachesLimits } from '@constants/approachesLimits'
+import { Category, Colors, Mode } from '@types'
 
 interface UserSettingsStore {
 	settings: {
@@ -9,7 +9,10 @@ interface UserSettingsStore {
 		times: Record<Mode, number>
 		selectedMode: Mode
 		selectedCategory: Category
+		approachesCount: number
 	}
+	currentApproach: number
+	activeCompletedPomodoro: boolean
 }
 
 export const useUserSettingsStore = defineStore('settings', {
@@ -17,23 +20,26 @@ export const useUserSettingsStore = defineStore('settings', {
 		return {
 			settings: {
 				colors: {
-					pomodoro: 'blue',
-					short: 'purple',
-					long: 'red'
+					[Mode.pomodoro]: 'blue',
+					[Mode.short]: 'purple',
+					[Mode.long]: 'red'
 				},
 				times: {
-					pomodoro: 3 / 60,
-					short: 4 / 60,
-					long: 5 / 60
+					[Mode.pomodoro]: 3 / 60,
+					[Mode.short]: 4 / 60,
+					[Mode.long]: 5 / 60
 				},
-				selectedMode: 'pomodoro',
+				selectedMode: Mode.pomodoro,
 				selectedCategory: {
 					_id: '0',
 					color: 'red',
 					mode: 'time',
 					name: 'Pomodoro'
-				}
-			}
+				},
+				approachesCount: 4
+			},
+			currentApproach: 1,
+			activeCompletedPomodoro: false
 		}
 	},
 	getters: {
@@ -47,6 +53,11 @@ export const useUserSettingsStore = defineStore('settings', {
 		},
 		setSelectedMode(mode: Mode) {
 			this.settings.selectedMode = mode
+		},
+		setApproachesCount(value: number) {
+			if (value > approachesLimits.max || value < approachesLimits.min) return
+
+			this.settings.approachesCount = value
 		}
 	},
 	persist: true

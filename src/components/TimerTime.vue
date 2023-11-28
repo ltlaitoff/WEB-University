@@ -9,7 +9,9 @@ const props = defineProps<{
 </script>
 
 <template>
-	<div class="text-center mt-6 text-[8rem] leading-[0.8] flex items-center">
+	<div
+		class="text-center mt-6 text-[8rem] max-md:text-[4rem] leading-[0.8] flex items-center"
+	>
 		<TimerDigit
 			v-if="props.hours > 0"
 			:digit="props.hours"
@@ -20,5 +22,3 @@ const props = defineProps<{
 		<TimerDigit :digit="props.seconds" />
 	</div>
 </template>
-
-<style scoped></style>
