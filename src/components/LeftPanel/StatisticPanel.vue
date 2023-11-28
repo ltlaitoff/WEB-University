@@ -35,7 +35,7 @@ const statisticForOutput = computed(() => {
 					</span>
 
 					<span class="">
-						{{ new Date(Number(item.date)).toLocaleString('en-GB') }}
+						{{ new Date(item.date).toLocaleString('en-GB') }}
 					</span>
 				</div>
 
