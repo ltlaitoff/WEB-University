@@ -25,9 +25,9 @@ export const useUserSettingsStore = defineStore('settings', {
 					[Mode.long]: 'red'
 				},
 				times: {
-					[Mode.pomodoro]: 3 / 60,
-					[Mode.short]: 4 / 60,
-					[Mode.long]: 5 / 60
+					[Mode.pomodoro]: 25,
+					[Mode.short]: 5,
+					[Mode.long]: 15
 				},
 				selectedMode: Mode.pomodoro,
 				selectedCategory: {
