@@ -8,12 +8,13 @@ interface CategoryStore {
 
 export const useCategoryStore = defineStore('category', {
 	state: (): CategoryStore => ({
+		// TODO: Refactor
 		categories: [
 			{
 				_id: '0',
-				color: 'red',
+				color: 'gray',
 				mode: 'time',
-				name: 'Pomodoro'
+				name: 'Default'
 			}
 		]
 	}),
