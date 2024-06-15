@@ -21,7 +21,7 @@ const statisticForOutput = computed(() => {
 	<div
 		class="pl-6 pr-6 py-6 w-full h-full flex flex-col gap-y-4 overflow-y-scroll"
 	>
-		<div class="text-center text-2xl">Statistic</div>
+		<div class="text-center text-2xl">{{ $t('statistic.title') }}</div>
 
 		<div
 			class="flex w-full gap-x-2"
