@@ -27,7 +27,7 @@ function submitForm(payload: AddNewCategory) {
 	<div
 		class="pl-6 pr-6 py-6 w-[450px] max-md:pb-6 max-md:w-full h-full flex flex-col gap-y-2 overflow-scroll"
 	>
-		<div class="text-center text-2xl">Categories</div>
+		<div class="text-center text-2xl">{{ $t('category.title') }}</div>
 
 		<div
 			class="relative"
@@ -37,7 +37,7 @@ function submitForm(payload: AddNewCategory) {
 				class="border px-4 py-2 bg-white border-slate-400 rounded-xl text-slate-700 hover:bg-slate-100 transition-all duration-200"
 				@click="modalOpened = !modalOpened"
 			>
-				Add category
+				{{ $t('category.add') }}
 			</button>
 
 			<CategoryForm
