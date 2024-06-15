@@ -48,7 +48,7 @@ function changeColor(newColor: Colors) {
 		class="absolute max-w-[300px] shadow rounded-lg px-4 py-4 flex flex-col gap-y-6 border border-black"
 	>
 		<label class="flex gap-x-2 items-center">
-			<div class="text-slate-800">Name:</div>
+			<div class="text-slate-800">{{ $t('default.name') }}:</div>
 			<input
 				class="w-full border border-slate-400 px-2 py-1 rounded-md"
 				:class="{
@@ -72,13 +72,13 @@ function changeColor(newColor: Colors) {
 			v-if="allowShowError"
 			class="text-red-600 text-center"
 		>
-			Not valid name!
+			{{ $t('validation.not-found') }}
 		</div>
 
 		<button
 			class="w-full bg-green-400 py-2 rounded-md text-white hover:bg-green-500"
 		>
-			Add
+			{{ $t('default.add') }}
 		</button>
 	</form>
 </template>
