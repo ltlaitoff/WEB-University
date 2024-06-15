@@ -7,12 +7,16 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { vCloseModal } from '@directives'
 
 import App from './App.vue'
+import enTranslation from './assets/i18n/en/translation.json'
 import './style.css'
 
 const app = createApp(App)
 const pinia = createPinia()
 const i18n = createI18n({
-	// something vue-i18n options here ...
+	locale: 'en',
+	messages: {
+		en: enTranslation
+	}
 })
 
 pinia.use(piniaPluginPersistedstate)

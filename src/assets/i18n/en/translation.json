@@ -1,0 +1,10 @@
+{
+	"validation": {
+		"not-valid": "Not valid name!"
+	},
+	"default": {
+		"add": "Add",
+		"name": "Name"
+	},
+	"category": {}
+}
