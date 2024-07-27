@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
 
+import { Category } from '@entities/Category.ts'
+import { Colors } from '@entities/Colors.ts'
+import { Mode } from '@entities/Mode.ts'
+
 import { approachesLimits } from '@constants/approachesLimits'
-import { Category, Colors, Mode } from '@types'
 
 interface UserSettingsStore {
 	settings: {

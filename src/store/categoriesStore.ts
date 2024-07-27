@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import { AddNewCategory, Category } from '@types'
+import { AddNewCategory, Category } from '@entities/Category.ts'
 
 interface CategoryStore {
 	categories: Category[]

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import traiwindColors from 'tailwindcss/colors'
 
+import { Colors } from '@entities/colors'
+
 import { tailwindColorsIgnore } from '@constants/tailwindColorsIgnore'
-import { Colors } from '@types'
 
 const props = withDefaults(
 	defineProps<{

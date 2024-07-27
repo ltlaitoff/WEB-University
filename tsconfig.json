@@ -25,14 +25,12 @@
 			"@components/*": ["./src/components/*"],
 			"@constants/*": ["./src/constants/*"],
 			"@store/*": ["./src/store/*"],
-			"@types/*": ["./src/types/*"],
 			"@utils/*": ["./src/utils/*"],
 
 			/* Imports like '@constants' */
 			"@components": ["./src/components"],
 			"@constants": ["./src/constants"],
 			"@store": ["./src/store"],
-			"@types": ["./src/types"],
 			"@utils": ["./src/utils"],
 			"@/*": ["./src/*"]
 		},

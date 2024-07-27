@@ -2,13 +2,15 @@
 import { computed, onMounted, watchEffect } from 'vue'
 import { useTimer } from 'vue-timer-hook'
 
+import { Mode } from '@entities/Mode.ts'
+
 import CategorySelect from '@components/CategorySelect.vue'
 import ControlButtons from '@components/ControlButtons.vue'
+import { ModeItem } from '@components/ModeItem.ts'
 import SelectMode from '@components/SelectMode.vue'
 import TimerTime from '@components/TimerTime.vue'
 import { useStatistic } from '@store/statisticStore'
 import { useUserSettingsStore } from '@store/userSettingsStore'
-import { Mode, ModeItem } from '@types'
 
 const userSettings = useUserSettingsStore()
 const statisticStore = useStatistic()

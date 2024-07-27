@@ -3,11 +3,13 @@ import { computed, ref } from 'vue'
 
 import tailwindColors from 'tailwindcss/colors'
 
+import { Colors } from '@entities/Colors'
+import { Mode } from '@entities/Mode.ts'
 import BedIcon from '@shared/icons/bed.svg'
 import BrainIcon from '@shared/icons/brain.svg'
 import CupIcon from '@shared/icons/cup.svg'
 
-import { Colors, Mode, ModeItem } from '@types'
+import { ModeItem } from '@components/ModeItem.ts'
 
 const props = defineProps<{
 	modelValue: Mode

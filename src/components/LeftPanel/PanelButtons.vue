@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import tailwindColors from 'tailwindcss/colors'
 
-import { LeftPanelModes } from '@types'
+import { LeftPanelModes } from '@components/LeftPanelModes.ts'
 
 import { useUserSettingsStore } from '../../store/userSettingsStore'
 

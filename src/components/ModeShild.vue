@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import tailwindColors from 'tailwindcss/colors'
 
+import { Mode } from '@entities/Mode'
+
 import { modeText } from '@constants'
 import { useUserSettingsStore } from '@store/userSettingsStore'
-import { Mode } from '@types'
 
 const props = defineProps<{
 	mode: Mode

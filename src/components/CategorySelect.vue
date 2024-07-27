@@ -3,8 +3,9 @@ import { ref } from 'vue'
 
 import tailwindColors from 'tailwindcss/colors'
 
+import { Category } from '@entities/Category'
+
 import { useCategoryStore } from '@store/categoriesStore'
-import { Category } from '@types'
 
 const props = defineProps<{
 	modelValue: Category

@@ -1,4 +1,4 @@
-import { Mode } from './Mode'
+import { Mode } from '@entities/Mode.ts'
 
 export interface ModeItem {
 	id: Mode

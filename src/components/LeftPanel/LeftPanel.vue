@@ -3,8 +3,8 @@ import { reactive, ref } from 'vue'
 
 import tailwindColors from 'tailwindcss/colors'
 
+import { LeftPanelModes } from '@components/LeftPanelModes.ts'
 import { useUserSettingsStore } from '@store/userSettingsStore'
-import { LeftPanelModes } from '@types'
 
 import CategoryPanel from './CategoryPanel.vue'
 import PanelButtons from './PanelButtons.vue'

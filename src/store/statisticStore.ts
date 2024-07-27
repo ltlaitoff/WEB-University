@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import { AddNewStatistic, Statistic } from '@types'
+import { AddNewStatistic, Statistic } from '@entities/Statistic'
 
 interface StatisticStore {
 	statistic: Statistic[]

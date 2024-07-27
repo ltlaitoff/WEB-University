@@ -3,10 +3,10 @@ import { ref } from 'vue'
 
 import tailwindColors from 'tailwindcss/colors'
 
+import { AddNewCategory } from '@entities/Category.ts'
 import TrashIcon from '@shared/icons/trash.svg'
 
 import { useCategoryStore } from '@store/categoriesStore'
-import { AddNewCategory } from '@types'
 
 import CategoryForm from './CategoryForm.vue'
 

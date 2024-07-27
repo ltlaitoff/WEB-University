@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+import { AddNewCategory } from '@entities/Category.ts'
+import { Colors } from '@entities/colors'
+
 import ColorPicker from '@components/ColorPicker.vue'
-import { Colors } from '@types'
-import { AddNewCategory } from '@types'
 
 const name = ref('')
 const color = ref<Colors>('fuchsia')
