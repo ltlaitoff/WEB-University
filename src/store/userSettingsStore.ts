@@ -6,6 +6,9 @@ import { Category, Colors, Mode } from '@types'
 interface UserSettingsStore {
 	settings: {
 		colors: Record<Mode, Colors>
+		/**
+		 * Time in minutes
+		 */
 		times: Record<Mode, number>
 		selectedMode: Mode
 		selectedCategory: Category
