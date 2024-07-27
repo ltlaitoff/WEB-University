@@ -27,7 +27,6 @@
 			"@store/*": ["./src/store/*"],
 			"@types/*": ["./src/types/*"],
 			"@utils/*": ["./src/utils/*"],
-			"@directives/*": ["./src/directives/*"],
 
 			/* Imports like '@constants' */
 			"@components": ["./src/components"],
@@ -35,7 +34,6 @@
 			"@store": ["./src/store"],
 			"@types": ["./src/types"],
 			"@utils": ["./src/utils"],
-			"@directives": ["./src/directives"],
 			"@/*": ["./src/*"]
 		},
 		/* Linting */

@@ -4,9 +4,8 @@ import { createI18n } from 'vue-i18n'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
+import { vCloseModal } from '@shared/directives/vCloseModal'
 import enTranslation from '@shared/i18n'
-
-import { vCloseModal } from '@directives'
 
 import App from './App.vue'
 import './style.css'
