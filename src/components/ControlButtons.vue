@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import tailwindColors from 'tailwindcss/colors'
 
-import FastForwardIcon from '@assets/icons/fastForward.svg'
-import PauseIcon from '@assets/icons/pause.svg'
-import PlayIcon from '@assets/icons/play.svg'
-import StopIcon from '@assets/icons/stop.svg'
+import FastForwardIcon from '@shared/icons/fastForward.svg'
+import PauseIcon from '@shared/icons/pause.svg'
+import PlayIcon from '@shared/icons/play.svg'
+import StopIcon from '@shared/icons/stop.svg'
+
 import { Colors } from '@types'
 
 const props = defineProps<{

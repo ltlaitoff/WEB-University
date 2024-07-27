@@ -22,7 +22,6 @@
 			"@shared/*": ["./src/shared/*"],
 
 			/* Imports like "@components/App" */
-			"@assets/*": ["./src/assets/*"],
 			"@components/*": ["./src/components/*"],
 			"@constants/*": ["./src/constants/*"],
 			"@store/*": ["./src/store/*"],
@@ -31,7 +30,6 @@
 			"@directives/*": ["./src/directives/*"],
 
 			/* Imports like '@constants' */
-			"@assets": ["./src/assets"],
 			"@components": ["./src/components"],
 			"@constants": ["./src/constants"],
 			"@store": ["./src/store"],

@@ -3,7 +3,8 @@ import { computed } from 'vue'
 
 import tailwindColors from 'tailwindcss/colors'
 
-import TrashIcon from '@assets/icons/trash.svg'
+import TrashIcon from '@shared/icons/trash.svg'
+
 import ModeShild from '@components/ModeShild.vue'
 import { useStatistic } from '@store/statisticStore'
 

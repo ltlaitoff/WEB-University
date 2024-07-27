@@ -3,7 +3,8 @@ import { ref } from 'vue'
 
 import tailwindColors from 'tailwindcss/colors'
 
-import TrashIcon from '@assets/icons/trash.svg'
+import TrashIcon from '@shared/icons/trash.svg'
+
 import { useCategoryStore } from '@store/categoriesStore'
 import { AddNewCategory } from '@types'
 

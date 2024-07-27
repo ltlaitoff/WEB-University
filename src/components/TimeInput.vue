@@ -3,8 +3,8 @@ import { computed, defineModel, withDefaults } from 'vue'
 
 import { format, parse } from 'date-fns'
 
-import MinusIcon from '@assets/icons/minus.svg'
-import PlusIcon from '@assets/icons/plus.svg'
+import MinusIcon from '@shared/icons/minus.svg'
+import PlusIcon from '@shared/icons/plus.svg'
 
 const props = withDefaults(
 	defineProps<{

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue'
 
-import MinusIcon from '@assets/icons/minus.svg'
-import PlusIcon from '@assets/icons/plus.svg'
+import MinusIcon from '@shared/icons/minus.svg'
+import PlusIcon from '@shared/icons/plus.svg'
 
 const props = withDefaults(
 	defineProps<{
