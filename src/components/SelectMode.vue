@@ -20,7 +20,9 @@ const emit = defineEmits<{
 
 const selectedColor = computed({
 	get() {
-		const findedItem = colorsData.find(item => item.id === props.modelValue)
+		const findedItem = colorsData.find(
+			item => props.colors[item.id] === props.modelValue
+		)
 		return findedItem || colorsData[0]
 	},
 	set(value) {
@@ -70,11 +72,21 @@ function changeSelectedColor(data: ModeItem) {
 		<button
 			class="item-colors rounded-full border flex items-center gap-x-2 px-4 py-2 item-colors-selected cursor-pointer transition-all duration-100"
 			:style="{
-				'--select-mode-bg': `var(--color-${selectedColor.id}-100)`,
-				'--select-mode-border-color': `var(--color-${selectedColor.id}-950)`,
-				'--select-mode-color': `var(--color-${selectedColor.id}-950)`,
-				'--select-mode-bg-hover': `var(--color-${selectedColor.id}-200)`,
-				'--select-mode-selected-border-color': `var(--color-${selectedColor.id}-950)`
+				'--select-mode-bg': `var(--color-${
+					props.colors[selectedColor.id]
+				}-100)`,
+				'--select-mode-border-color': `var(--color-${
+					props.colors[selectedColor.id]
+				}-950)`,
+				'--select-mode-color': `var(--color-${
+					props.colors[selectedColor.id]
+				}-950)`,
+				'--select-mode-bg-hover': `var(--color-${
+					props.colors[selectedColor.id]
+				}-200)`,
+				'--select-mode-selected-border-color': `var(--color-${
+					props.colors[selectedColor.id]
+				}-950)`
 			}"
 			@click="toggleSelect"
 		>
@@ -95,11 +107,15 @@ function changeSelectedColor(data: ModeItem) {
 				class="item-colors flex items-center gap-x-2 px-4 py-2 cursor-pointer transition-all duration-100"
 				@click="changeSelectedColor(item)"
 				:style="{
-					'--select-mode-bg': `var(--color-${item.id}-100)`,
-					'--select-mode-border-color': `var(--color-${item.id}-950)`,
-					'--select-mode-color': `var(--color-${item.id}-950)`,
-					'--select-mode-bg-hover': `var(--color-${item.id}-200)`,
-					'--select-mode-selected-border-color': `var(--color-${item.id}-950)`
+					'--select-mode-bg': `var(--color-${props.colors[item.id]}-100)`,
+					'--select-mode-border-color': `var(--color-${
+						props.colors[item.id]
+					}-950)`,
+					'--select-mode-color': `var(--color-${props.colors[item.id]}-950)`,
+					'--select-mode-bg-hover': `var(--color-${props.colors[item.id]}-200)`,
+					'--select-mode-selected-border-color': `var(--color-${
+						props.colors[item.id]
+					}-950)`
 				}"
 			>
 				<component

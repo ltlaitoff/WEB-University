@@ -14,7 +14,7 @@ const emits = defineEmits<{
 	(event: 'burgerToggle'): void
 }>()
 
-const { getSelectedModeColor } = useUserSettingsStore()
+const userSettingsStore = useUserSettingsStore()
 
 const data: {
 	title: string
@@ -43,13 +43,13 @@ const data: {
 			class="py-3 px-4 rounded-r-xl shadow clip-your-needful-style"
 			@click="emits('click', item.key)"
 			:style="{
-				color: `var(--color-${getSelectedModeColor}-950)`,
+				color: `var(--color-${userSettingsStore.getSelectedModeColor}-950)`,
 				backgroundColor:
 					props.isOpened === false
-						? `var(--color-${getSelectedModeColor}-200)`
+						? `var(--color-${userSettingsStore.getSelectedModeColor}-200)`
 						: props.mode === item.key
-						? `var(--color-${getSelectedModeColor}-300)`
-						: `var(--color-${getSelectedModeColor}-200)`
+						? `var(--color-${userSettingsStore.getSelectedModeColor}-300)`
+						: `var(--color-${userSettingsStore.getSelectedModeColor}-200)`
 			}"
 		>
 			{{ item.title }}
@@ -63,7 +63,7 @@ const data: {
 				props.burgerOpened ? 'gap-y-[0px]' : 'gap-y-[5px]'
 			]"
 			:style="{
-				backgroundColor: `var(--color-${getSelectedModeColor}-300)`
+				backgroundColor: `var(--color-${userSettingsStore.getSelectedModeColor}-300)`
 			}"
 			@click="emits('burgerToggle')"
 		>
@@ -93,7 +93,7 @@ const data: {
 				class="py-6 px-4 hover:bg-slate-200 rounded-md transition-all duration-150 text-2xl w-full"
 				@click="emits('click', item.key)"
 				:style="{
-					color: `var(--color-${getSelectedModeColor}-950)`
+					color: `var(--color-${userSettingsStore.getSelectedModeColor}-950)`
 				}"
 			>
 				{{ item.title }}

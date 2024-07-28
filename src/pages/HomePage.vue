@@ -176,7 +176,7 @@ function resetTimer(mode: Mode = selectedMode.value) {
 			@play-or-pause="onPlayOrPauseClick"
 			@fast-forward="onFastForwardClick"
 			:is-running="timer.isRunning.value"
-			:color="userSettings.colors[userSettings.settings.selectedMode]"
+			:color="userSettings.getSelectedModeColor"
 		/>
 	</div>
 </template>

@@ -4,7 +4,7 @@ import HomePage from '@pages/HomePage.vue'
 import LeftPanel from '@components/LeftPanel/LeftPanel.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
-const { getSelectedModeColor } = useUserSettingsStore()
+const userSettingsStore = useUserSettingsStore()
 </script>
 
 <template>
@@ -19,6 +19,8 @@ const { getSelectedModeColor } = useUserSettingsStore()
 
 <style scoped>
 .main {
-	background: v-bind('`var(--color-${getSelectedModeColor}-50)`');
+	background: v-bind(
+		'`var(--color-${userSettingsStore.getSelectedModeColor}-50)`'
+	);
 }
 </style>

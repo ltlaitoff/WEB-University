@@ -9,7 +9,7 @@ import PanelButtons from './PanelButtons.vue'
 import SettingsPanel from './SettingsPanel.vue'
 import StatisticPanel from './StatisticPanel.vue'
 
-const { getSelectedModeColor } = useUserSettingsStore()
+const userSettingsStore = useUserSettingsStore()
 
 const LeftPanelSettings = reactive<{
 	isOpened: boolean
@@ -44,7 +44,7 @@ function toggleBurgerMenu() {
 		<div
 			:class="`w-[450px] z-10 bg-white border-r-[2px] shadow`"
 			:style="{
-				borderColor: `var(--color-${getSelectedModeColor}-300)`
+				borderColor: `var(--color-${userSettingsStore.getSelectedModeColor}-300)`
 			}"
 		>
 			<StatisticPanel v-if="LeftPanelSettings.mode === 'statistic'" />
