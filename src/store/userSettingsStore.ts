@@ -51,7 +51,9 @@ export const useUserSettingsStore = defineStore('settings', {
 	getters: {
 		colors: state => state.settings.colors,
 		times: state => state.settings.times,
-		selectedMode: state => state.settings.selectedMode
+		selectedMode: state => state.settings.selectedMode,
+		getSelectedModeColor: state =>
+			state.settings.colors[state.settings.selectedMode]
 	},
 	actions: {
 		setColor(mode: Mode, color: Colors) {

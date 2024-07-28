@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
-import tailwindColors from 'tailwindcss/colors'
-
 import { LeftPanelModes } from '@components/LeftPanelModes.ts'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
@@ -11,7 +9,7 @@ import PanelButtons from './PanelButtons.vue'
 import SettingsPanel from './SettingsPanel.vue'
 import StatisticPanel from './StatisticPanel.vue'
 
-const userSettings = useUserSettingsStore()
+const { getSelectedModeColor } = useUserSettingsStore()
 
 const LeftPanelSettings = reactive<{
 	isOpened: boolean
@@ -42,23 +40,12 @@ function toggleBurgerMenu() {
 	<div
 		class="element absolute h-full transition-all duration-700 -translate-x-[450px] ease-in-out flex z-10 max-md:hidden"
 		:class="LeftPanelSettings.isOpened ? 'translate-x-0' : ''"
-		:style="{
-			'--right-panel-color-200':
-				tailwindColors[userSettings.colors[userSettings.settings.selectedMode]][
-					'200'
-				],
-			'--right-panel-color-300':
-				tailwindColors[userSettings.colors[userSettings.settings.selectedMode]][
-					'300'
-				],
-			'--right-panel-color-950':
-				tailwindColors[userSettings.colors[userSettings.settings.selectedMode]][
-					'950'
-				]
-		}"
 	>
 		<div
-			class="w-[450px] z-10 bg-white border-r-[2px] border-[--right-panel-color-300] shadow"
+			:class="`w-[450px] z-10 bg-white border-r-[2px] shadow`"
+			:style="{
+				borderColor: `var(--color-${getSelectedModeColor}-300)`
+			}"
 		>
 			<StatisticPanel v-if="LeftPanelSettings.mode === 'statistic'" />
 			<SettingsPanel v-if="LeftPanelSettings.mode === 'settings'" />

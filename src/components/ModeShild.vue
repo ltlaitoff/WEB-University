@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import tailwindColors from 'tailwindcss/colors'
+import { computed } from 'vue'
 
 import { Mode } from '@entities/Mode'
 
@@ -11,6 +11,7 @@ const props = defineProps<{
 }>()
 
 const userSettings = useUserSettingsStore()
+const userColor = computed(() => userSettings.colors[props.mode])
 </script>
 
 <template>
@@ -18,8 +19,8 @@ const userSettings = useUserSettingsStore()
 		<div
 			class="inline-block px-4 py-1 rounded-2xl"
 			:style="{
-				background: tailwindColors[userSettings.colors[props.mode]]['100'],
-				color: tailwindColors[userSettings.colors[props.mode]]['950']
+				background: `var(--color-${userColor}-100)`,
+				color: `var(--color-${userColor}-950)`
 			}"
 		>
 			{{ modeText[props.mode] }}

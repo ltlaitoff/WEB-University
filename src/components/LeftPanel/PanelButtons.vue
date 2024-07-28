@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import tailwindColors from 'tailwindcss/colors'
-
 import { LeftPanelModes } from '@components/LeftPanelModes.ts'
 
 import { useUserSettingsStore } from '../../store/userSettingsStore'
@@ -16,7 +14,7 @@ const emits = defineEmits<{
 	(event: 'burgerToggle'): void
 }>()
 
-const userSettings = useUserSettingsStore()
+const { getSelectedModeColor } = useUserSettingsStore()
 
 const data: {
 	title: string
@@ -42,15 +40,17 @@ const data: {
 		<button
 			v-for="item of data"
 			:key="item.key"
-			class="py-3 px-4 rounded-r-xl shadow clip-your-needful-style text-[--right-panel-color-950]"
-			:class="
-				props.isOpened === false
-					? 'bg-[--right-panel-color-200]'
-					: props.mode === item.key
-					? 'bg-[--right-panel-color-300] z-20'
-					: 'bg-[--right-panel-color-200]'
-			"
+			class="py-3 px-4 rounded-r-xl shadow clip-your-needful-style"
 			@click="emits('click', item.key)"
+			:style="{
+				color: `var(--color-${getSelectedModeColor}-950)`,
+				backgroundColor:
+					props.isOpened === false
+						? `var(--color-${getSelectedModeColor}-200)`
+						: props.mode === item.key
+						? `var(--color-${getSelectedModeColor}-300)`
+						: `var(--color-${getSelectedModeColor}-200)`
+			}"
 		>
 			{{ item.title }}
 		</button>
@@ -58,11 +58,12 @@ const data: {
 
 	<div class="max-md:flex hidden z-10">
 		<button
-			class="absolute top-5 right-5 w-8 h-8 bg-[--button-panel-bg] rounded-lg z-50 flex items-center justify-center"
-			:class="props.burgerOpened ? 'gap-y-[0px]' : 'gap-y-[5px]'"
+			:class="[
+				`absolute top-5 right-5 w-8 h-8 rounded-lg z-50 flex items-center justify-center`,
+				props.burgerOpened ? 'gap-y-[0px]' : 'gap-y-[5px]'
+			]"
 			:style="{
-				'--button-panel-bg':
-					tailwindColors[userSettings.colors[userSettings.selectedMode]]['300']
+				backgroundColor: `var(--color-${getSelectedModeColor}-300)`
 			}"
 			@click="emits('burgerToggle')"
 		>
@@ -89,8 +90,11 @@ const data: {
 			<button
 				v-for="item of data"
 				:key="item.key"
-				class="py-6 px-4 text-[--right-panel-color-950] hover:bg-slate-200 rounded-md transition-all duration-150 text-2xl w-full"
+				class="py-6 px-4 hover:bg-slate-200 rounded-md transition-all duration-150 text-2xl w-full"
 				@click="emits('click', item.key)"
+				:style="{
+					color: `var(--color-${getSelectedModeColor}-950)`
+				}"
 			>
 				{{ item.title }}
 			</button>

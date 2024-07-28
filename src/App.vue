@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import tailwindColors from 'tailwindcss/colors'
-
 import HomePage from '@pages/HomePage.vue'
 
 import LeftPanel from '@components/LeftPanel/LeftPanel.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
-const userSettings = useUserSettingsStore()
+const { getSelectedModeColor } = useUserSettingsStore()
 </script>
 
 <template>
@@ -21,8 +19,6 @@ const userSettings = useUserSettingsStore()
 
 <style scoped>
 .main {
-	background: v-bind(
-		'tailwindColors[userSettings.colors[userSettings.settings.selectedMode]]["50"]'
-	);
+	background: v-bind('`var(--color-${getSelectedModeColor}-50)`');
 }
 </style>

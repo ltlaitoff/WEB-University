@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import tailwindColors from 'tailwindcss/colors'
-
 import TrashIcon from '@shared/icons/trash.svg'
 
 import ModeShild from '@components/ModeShild.vue'
@@ -49,7 +47,7 @@ const statisticForOutput = computed(() => {
 						<div
 							class="w-3 h-3 rounded-full"
 							:style="{
-								backgroundColor: tailwindColors[item.category.color]['400']
+								backgroundColor: `var(--color-${item.category.color}-400)`
 							}"
 						></div>
 						<div class="">{{ item.category.name }}</div>

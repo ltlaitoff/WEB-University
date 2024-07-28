@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import tailwindColors from 'tailwindcss/colors'
-
 import { AddNewCategory } from '@entities/Category.ts'
 import TrashIcon from '@shared/icons/trash.svg'
 
@@ -59,7 +57,7 @@ function submitForm(payload: AddNewCategory) {
 					<div
 						class="w-3 h-3 rounded-full bg-[--category-panel-bg]"
 						:style="{
-							'--category-panel-bg': tailwindColors[category.color]['400']
+							'--category-panel-bg': `var(--color-${category.color}-400)`
 						}"
 					></div>
 					<div class="text-lg">{{ category.name }}</div>

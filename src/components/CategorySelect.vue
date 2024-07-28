@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import tailwindColors from 'tailwindcss/colors'
-
 import { Category } from '@entities/Category'
 
 import { useCategoryStore } from '@store/categoriesStore'
@@ -42,10 +40,8 @@ function hideSelect() {
 		<button
 			class="item rounded-full inline-flex gap-x-2 justify-center items-center px-4 py-2 hover:bg-blue-100 hover:cursor-pointer transition-all duration-200"
 			:style="{
-				'--category-select-cicle-bg':
-					tailwindColors[props.modelValue.color]['400'],
-				'--category-select-bg-hover':
-					tailwindColors[props.modelValue.color]['100']
+				'--category-select-cicle-bg': `var(--color-${props.modelValue.color}-400)`,
+				'--category-select-bg-hover': `var(--color-${props.modelValue.color}-100)`
 			}"
 			@click="toggleOpened"
 		>
@@ -63,9 +59,9 @@ function hideSelect() {
 				@click="() => onChange(item)"
 				class="item flex items-center gap-x-2 px-4 py-2 cursor-pointer transition-all duration-100"
 				:style="{
-					'--category-select-cicle-bg': tailwindColors[item.color]['400'],
-					'--category-select-color': tailwindColors[item.color]['100'],
-					'--category-select-bg-hover': tailwindColors[item.color]['200']
+					'--category-select-cicle-bg': `var(--color-${item.color}-400)`,
+					'--category-select-color': `var(--color-${item.color}-100)`,
+					'--category-select-bg-hover': `var(--color-${item.color}-200)`
 				}"
 			>
 				{{ item.name }}

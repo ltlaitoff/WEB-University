@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import tailwindColors from 'tailwindcss/colors'
-
 import { Colors } from '@entities/colors'
 import FastForwardIcon from '@shared/icons/fastForward.svg'
 import PauseIcon from '@shared/icons/pause.svg'
@@ -59,20 +57,20 @@ const emits = defineEmits<{
 
 <style scoped>
 .primary-button {
-	background: v-bind("tailwindColors[props.color]?.['400']");
-	color: v-bind("tailwindColors[props.color]?.['950']");
+	background: v-bind('`var(--color-${props.color}-400)`');
+	color: v-bind('`var(--color-${props.color}-950)`');
 }
 
 .primary-button:hover {
-	background: v-bind("tailwindColors[props.color]?.['500']");
+	background: v-bind('`var(--color-${props.color}-500)`');
 }
 
 .secondary-button {
-	background: v-bind("tailwindColors[props.color]?.['200']");
-	color: v-bind("tailwindColors[props.color]?.['900']");
+	background: v-bind('`var(--color-${props.color}-200)`');
+	color: v-bind('`var(--color-${props.color}-900)`');
 }
 
 .secondary-button:hover {
-	background: v-bind("tailwindColors[props.color]?.['300']");
+	background: v-bind('`var(--color-${props.color}-300)`');
 }
 </style>
