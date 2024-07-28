@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 
 import { AddNewCategory } from '@entities/Category.ts'
-import { Colors } from '@entities/colors'
+import { Colors } from '@entities/Colors'
 
 import ColorPicker from '@components/ColorPicker.vue'
 

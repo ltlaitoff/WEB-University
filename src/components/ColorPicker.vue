@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import traiwindColors from 'tailwindcss/colors'
 
-import { Colors } from '@entities/colors'
+import { Colors } from '@entities/Colors'
 
 import { tailwindColorsIgnore } from '@constants/tailwindColorsIgnore'
 

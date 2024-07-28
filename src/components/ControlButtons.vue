@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Colors } from '@entities/colors'
+import { Colors } from '@entities/Colors'
 import FastForwardIcon from '@shared/icons/fastForward.svg'
 import PauseIcon from '@shared/icons/pause.svg'
 import PlayIcon from '@shared/icons/play.svg'
