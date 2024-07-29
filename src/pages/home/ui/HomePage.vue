@@ -3,6 +3,7 @@ import { computed, onMounted, watchEffect } from 'vue'
 import { useTimer } from 'vue-timer-hook'
 
 import { Mode } from '@entities/Mode.ts'
+import { States } from '@entities/States.ts'
 
 import CategorySelect from '@components/CategorySelect.vue'
 import ControlButtons from '@components/ControlButtons.vue'
@@ -139,6 +140,10 @@ function resetTimer(mode: Mode = selectedMode.value) {
 		timer.restart(Date.now() + TIMER_LONG_BREAK_MODE.value, false)
 	}
 }
+
+const state = computed(() => {
+	return timer.isRunning.value ? States.timerRunning : States.timerPaused
+})
 </script>
 
 <template>
@@ -158,8 +163,6 @@ function resetTimer(mode: Mode = selectedMode.value) {
 				:seconds="timer.seconds.value"
 			/>
 
-			<div>Second time: "1"</div>
-
 			<div class="mt-3 text-lg flex justify-center text-">
 				<span class="text-blue-800">
 					{{ userSettings.currentApproach }}
@@ -172,10 +175,10 @@ function resetTimer(mode: Mode = selectedMode.value) {
 		</div>
 
 		<ControlButtons
-			@stop="resetTimer"
-			@play-or-pause="onPlayOrPauseClick"
-			@fast-forward="onFastForwardClick"
-			:is-running="timer.isRunning.value"
+			@stop-click="resetTimer"
+			@main-click="onPlayOrPauseClick"
+			@fast-forward-click="onFastForwardClick"
+			:state="state"
 			:color="userSettings.getSelectedModeColor"
 		/>
 	</div>

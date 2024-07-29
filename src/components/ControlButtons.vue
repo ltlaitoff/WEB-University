@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { Colors } from '@entities/Colors'
+import { States } from '@entities/States.ts'
 import FastForwardIcon from '@shared/icons/fastForward.svg'
 import PauseIcon from '@shared/icons/pause.svg'
 import PlayIcon from '@shared/icons/play.svg'
 import StopIcon from '@shared/icons/stop.svg'
 
 const props = defineProps<{
-	isRunning: boolean
+	state: States
 	color: Colors
 }>()
 
 const emits = defineEmits<{
-	(e: 'stop'): void
-	(e: 'fastForward'): void
-	(e: 'playOrPause'): void
+	(e: 'stop-click'): void
+	(e: 'main-click'): void
+	(e: 'fast-forward-click'): void
 }>()
 </script>
 
@@ -21,7 +22,7 @@ const emits = defineEmits<{
 	<div class="flex justify-center items-center gap-x-2">
 		<div class="">
 			<button
-				@click="emits('stop')"
+				@click="emits('stop-click')"
 				class="secondary-button inline text-lg px-4 py-4 rounded-2xl hover:shadow transition-all duration-200"
 			>
 				<StopIcon class="w-5 h-5" />
@@ -30,15 +31,15 @@ const emits = defineEmits<{
 
 		<div class="">
 			<button
-				@click="emits('playOrPause')"
+				@click="emits('main-click')"
 				class="primary-button inline text-lg px-6 py-4 rounded-2xl hover:shadow transition-all duration-200"
 			>
 				<PlayIcon
-					v-if="!props.isRunning"
+					v-if="props.state === States.timerPaused"
 					class="w-7 h-7"
 				/>
 				<PauseIcon
-					v-else
+					v-if="props.state === States.timerRunning"
 					class="w-7 h-7"
 				/>
 			</button>
@@ -46,7 +47,7 @@ const emits = defineEmits<{
 
 		<div class="">
 			<button
-				@click="emits('fastForward')"
+				@click="emits('fast-forward-click')"
 				class="secondary-button inline text-lg px-4 py-4 rounded-2xl hover:shadow transition-all duration-200"
 			>
 				<FastForwardIcon class="w-5 h-5" />
@@ -57,6 +58,9 @@ const emits = defineEmits<{
 
 <style scoped>
 .primary-button {
+	/**
+	 * TODO: Use something like --mode-color-{number}
+	 */
 	background: v-bind('`var(--color-${props.color}-400)`');
 	color: v-bind('`var(--color-${props.color}-950)`');
 }
