@@ -9,8 +9,8 @@ import ControlButtons from '@components/ControlButtons.vue'
 import { ModeItem } from '@components/ModeItem.ts'
 import SelectMode from '@components/SelectMode.vue'
 import TimerTime from '@components/TimerTime.vue'
-import { useStatistic } from '@store/statisticStore'
-import { useUserSettingsStore } from '@store/userSettingsStore'
+import { useStatistic } from '@store/statisticStore.ts'
+import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
 const userSettings = useUserSettingsStore()
 const statisticStore = useStatistic()

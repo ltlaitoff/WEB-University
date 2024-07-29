@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import HomePage from '@pages/HomePage.vue'
+import HomePage from '@pages/home/ui/HomePage.vue'
 
 import LeftPanel from '@components/LeftPanel/LeftPanel.vue'
-import { useUserSettingsStore } from '@store/userSettingsStore'
+import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
 const userSettingsStore = useUserSettingsStore()
 </script>
