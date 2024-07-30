@@ -7,7 +7,6 @@ import { States } from '@entities/States.ts'
 
 import CategorySelect from '@components/CategorySelect.vue'
 import ControlButtons from '@components/ControlButtons.vue'
-import { ModeItem } from '@components/ModeItem.ts'
 import SelectMode from '@components/SelectMode.vue'
 import TimerTime from '@components/TimerTime.vue'
 import { useStatistic } from '@store/statisticStore.ts'
@@ -18,17 +17,7 @@ const statisticStore = useStatistic()
 
 const selectedMode = computed(() => userSettings.selectedMode)
 
-const TIMER_POMODORO_MODE = computed(
-	() => userSettings.times[Mode.pomodoro] * 60 * 1000
-)
-const TIMER_SHORT_BREAK_MODE = computed(
-	() => userSettings.times[Mode.short] * 60 * 1000
-)
-const TIMER_LONG_BREAK_MODE = computed(
-	() => userSettings.times[Mode.long] * 60 * 1000
-)
-
-const timer = useTimer(Date.now() + TIMER_POMODORO_MODE.value, false)
+const timer = useTimer(Date.now() + userSettings.times[Mode.pomodoro], false)
 // TODO: Remove / move to mounted
 resetTimer()
 
@@ -63,14 +52,9 @@ function onPlayOrPauseClick() {
 }
 
 function onFastForwardClick() {
-	const currentTimer =
-		selectedMode.value === Mode.pomodoro
-			? TIMER_POMODORO_MODE
-			: selectedMode.value === Mode.short
-			? TIMER_SHORT_BREAK_MODE
-			: TIMER_LONG_BREAK_MODE
+	const currentTimer = userSettings.times[selectedMode.value]
 
-	timer.restart(Date.now() + currentTimer.value, false)
+	timer.restart(Date.now() + currentTimer, false)
 
 	incrementAndResetApproach()
 }
@@ -90,13 +74,13 @@ onMounted(() => {
 				if (selectedMode.value === Mode.short) {
 					statisticStore.add({
 						mode: selectedMode.value,
-						count: TIMER_LONG_BREAK_MODE.value,
+						count: userSettings.times[Mode.long],
 						category: userSettings.settings.selectedCategory
 					})
 				} else {
 					statisticStore.add({
 						mode: selectedMode.value,
-						count: TIMER_SHORT_BREAK_MODE.value,
+						count: userSettings.times[Mode.short],
 						category: userSettings.settings.selectedCategory
 					})
 				}
@@ -109,7 +93,7 @@ onMounted(() => {
 
 			statisticStore.add({
 				mode: selectedMode.value,
-				count: TIMER_POMODORO_MODE.value,
+				count: userSettings.times[Mode.pomodoro],
 				category: userSettings.settings.selectedCategory
 			})
 
@@ -122,23 +106,13 @@ onMounted(() => {
 	})
 })
 
-function onSelectedModeChange(id: ModeItem['id']) {
-	userSettings.setSelectedMode(id)
-	resetTimer(id)
+function onSelectedModeChange(mode: Mode) {
+	userSettings.setSelectedMode(mode)
+	resetTimer(mode)
 }
 
 function resetTimer(mode: Mode = selectedMode.value) {
-	if (mode === Mode.pomodoro) {
-		timer.restart(Date.now() + TIMER_POMODORO_MODE.value, false)
-	}
-
-	if (mode === Mode.short) {
-		timer.restart(Date.now() + TIMER_SHORT_BREAK_MODE.value, false)
-	}
-
-	if (mode === Mode.long) {
-		timer.restart(Date.now() + TIMER_LONG_BREAK_MODE.value, false)
-	}
+	timer.restart(Date.now() + userSettings.times[mode], false)
 }
 
 const state = computed(() => {

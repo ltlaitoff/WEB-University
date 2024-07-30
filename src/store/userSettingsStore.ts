@@ -10,7 +10,7 @@ interface UserSettingsStore {
 	settings: {
 		colors: Record<Mode, Colors>
 		/**
-		 * Time in minutes
+		 * Time in milliseconds
 		 */
 		times: Record<Mode, number>
 		selectedMode: Mode
@@ -31,9 +31,9 @@ export const useUserSettingsStore = defineStore('settings', {
 					[Mode.long]: 'red'
 				},
 				times: {
-					[Mode.pomodoro]: 25,
-					[Mode.short]: 5,
-					[Mode.long]: 15
+					[Mode.pomodoro]: 25 * 60 * 1000,
+					[Mode.short]: 5 * 60 * 1000,
+					[Mode.long]: 15 * 60 * 1000
 				},
 				selectedMode: Mode.pomodoro,
 				selectedCategory: {
