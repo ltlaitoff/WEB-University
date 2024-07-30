@@ -4,6 +4,7 @@ import { useTimer } from 'vue-timer-hook'
 
 import { Mode } from '@entities/Mode.ts'
 import { States } from '@entities/States.ts'
+import CurrentApproaches from '@pages/home/ui/CurrentApproaches.vue'
 
 import CategorySelect from '@components/CategorySelect.vue'
 import ControlButtons from '@components/ControlButtons.vue'
@@ -137,15 +138,10 @@ const state = computed(() => {
 				:seconds="timer.seconds.value"
 			/>
 
-			<div class="mt-3 text-lg flex justify-center text-">
-				<span class="text-blue-800">
-					{{ userSettings.currentApproach }}
-				</span>
-				<span class="text-blue-950">/</span>
-				<span class="text-blue-950">
-					{{ userSettings.settings.approachesCount }}
-				</span>
-			</div>
+			<CurrentApproaches
+				:approaches-count="userSettings.settings.approachesCount"
+				:current-approach="userSettings.currentApproach"
+			/>
 		</div>
 
 		<ControlButtons
