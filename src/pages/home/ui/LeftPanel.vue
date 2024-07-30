@@ -5,20 +5,21 @@ import CategoryPanel from '@components/LeftPanel/CategoryPanel.vue'
 import PanelButtons from '@components/LeftPanel/PanelButtons.vue'
 import SettingsPanel from '@components/LeftPanel/SettingsPanel.vue'
 import StatisticPanel from '@components/LeftPanel/StatisticPanel.vue'
-import { LeftPanelModes } from '@components/LeftPanelModes.ts'
 import { useUserSettingsStore } from '@store/userSettingsStore.ts'
+
+import { LeftPanelStates } from '../entities/LeftPanelStates.ts'
 
 const userSettingsStore = useUserSettingsStore()
 
 const LeftPanelSettings = reactive<{
 	isOpened: boolean
-	mode: LeftPanelModes
+	mode: LeftPanelStates
 }>({
 	isOpened: false,
 	mode: 'statistic'
 })
 
-function onClick(mode: LeftPanelModes) {
+function onClick(mode: LeftPanelStates) {
 	if (LeftPanelSettings.mode === mode) {
 		LeftPanelSettings.isOpened = !LeftPanelSettings.isOpened
 		return

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { LeftPanelModes } from '@components/LeftPanelModes.ts'
+import { LeftPanelStates } from '@pages/home/entities/LeftPanelStates.ts'
 
 import { useUserSettingsStore } from '../../store/userSettingsStore'
 
 const props = defineProps<{
 	isOpened: boolean
-	mode: LeftPanelModes
+	mode: LeftPanelStates
 	burgerOpened: boolean
 }>()
 
 const emits = defineEmits<{
-	(event: 'click', value: LeftPanelModes): void
+	(event: 'click', value: LeftPanelStates): void
 	(event: 'burgerToggle'): void
 }>()
 
@@ -18,7 +18,7 @@ const userSettingsStore = useUserSettingsStore()
 
 const data: {
 	title: string
-	key: LeftPanelModes
+	key: LeftPanelStates
 }[] = [
 	{
 		title: 'Settings',
