@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
+import CategoryPanel from '@components/LeftPanel/CategoryPanel.vue'
+import PanelButtons from '@components/LeftPanel/PanelButtons.vue'
+import SettingsPanel from '@components/LeftPanel/SettingsPanel.vue'
+import StatisticPanel from '@components/LeftPanel/StatisticPanel.vue'
 import { LeftPanelModes } from '@components/LeftPanelModes.ts'
-import { useUserSettingsStore } from '@store/userSettingsStore'
-
-import CategoryPanel from './CategoryPanel.vue'
-import PanelButtons from './PanelButtons.vue'
-import SettingsPanel from './SettingsPanel.vue'
-import StatisticPanel from './StatisticPanel.vue'
+import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
 const userSettingsStore = useUserSettingsStore()
 
