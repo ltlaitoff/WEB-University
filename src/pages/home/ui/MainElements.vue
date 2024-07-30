@@ -13,6 +13,8 @@ import TimerTime from '@components/TimerTime.vue'
 import { useStatistic } from '@store/statisticStore.ts'
 import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
+import { getNextMode } from '../model/getNextMode.ts'
+
 const userSettings = useUserSettingsStore()
 const statisticStore = useStatistic()
 
@@ -21,27 +23,6 @@ const selectedMode = computed(() => userSettings.selectedMode)
 const timer = useTimer(Date.now() + userSettings.times[Mode.pomodoro], false)
 // TODO: Remove / move to mounted
 resetTimer()
-
-// TODO: 50/50
-userSettings.$subscribe(data => {
-	if (
-		userSettings.activeCompletedPomodoro &&
-		data &&
-		data.events &&
-		// @ts-expect-error All good
-		data.events.key !== undefined &&
-		// @ts-expect-error All good
-		data.events.key === 'selectedMode' &&
-		// @ts-expect-error All good
-		data.events.newValue === Mode.pomodoro
-	) {
-		incrementAndResetApproach()
-
-		userSettings.activeCompletedPomodoro = false
-	}
-
-	resetTimer()
-})
 
 function onPlayOrPauseClick() {
 	if (timer.isRunning.value) {
@@ -71,37 +52,21 @@ function incrementAndResetApproach() {
 onMounted(() => {
 	watchEffect(async () => {
 		if (timer.isExpired.value) {
-			if (selectedMode.value !== Mode.pomodoro) {
-				if (selectedMode.value === Mode.short) {
-					statisticStore.add({
-						mode: selectedMode.value,
-						count: userSettings.times[Mode.long],
-						category: userSettings.settings.selectedCategory
-					})
-				} else {
-					statisticStore.add({
-						mode: selectedMode.value,
-						count: userSettings.times[Mode.short],
-						category: userSettings.settings.selectedCategory
-					})
-				}
-
-				onSelectedModeChange(Mode.pomodoro)
-				return
-			}
-
-			userSettings.activeCompletedPomodoro = true
+			const nextMode = getNextMode(
+				selectedMode.value,
+				userSettings.currentApproach
+			)
 
 			statisticStore.add({
 				mode: selectedMode.value,
-				count: userSettings.times[Mode.pomodoro],
+				count: userSettings.times[selectedMode.value],
 				category: userSettings.settings.selectedCategory
 			})
 
-			if (userSettings.currentApproach >= 4) {
-				onSelectedModeChange(Mode.long)
-			} else {
-				onSelectedModeChange(Mode.short)
+			onSelectedModeChange(nextMode)
+
+			if (nextMode === Mode.pomodoro) {
+				incrementAndResetApproach()
 			}
 		}
 	})

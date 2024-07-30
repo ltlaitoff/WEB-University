@@ -18,7 +18,6 @@ interface UserSettingsStore {
 		approachesCount: number
 	}
 	currentApproach: number
-	activeCompletedPomodoro: boolean
 }
 
 export const useUserSettingsStore = defineStore('settings', {
@@ -44,8 +43,7 @@ export const useUserSettingsStore = defineStore('settings', {
 				},
 				approachesCount: 4
 			},
-			currentApproach: 1,
-			activeCompletedPomodoro: false
+			currentApproach: 1
 		}
 	},
 	getters: {

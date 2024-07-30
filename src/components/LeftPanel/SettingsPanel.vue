@@ -29,7 +29,7 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 					<NumberInput
 						class="ml-1"
 						v-model="userSettings.settings.times[mode]"
-						:max="1439"
+						:max="Infinity"
 						:min="1"
 					/>
 
