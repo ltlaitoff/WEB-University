@@ -5,11 +5,11 @@ import { useTimer } from 'vue-timer-hook'
 import { Mode } from '@entities/Mode.ts'
 import { States } from '@entities/States.ts'
 import SelectMode from '@features/modes/ui/SelectMode.vue'
+import TimerTime from '@features/time/ui/TimerTime.vue'
 import CurrentApproaches from '@pages/home/ui/CurrentApproaches.vue'
 
 import CategorySelect from '@components/CategorySelect.vue'
 import ControlButtons from '@components/ControlButtons.vue'
-import TimerTime from '@components/TimerTime.vue'
 import { useStatistic } from '@store/statisticStore.ts'
 import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
