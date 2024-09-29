@@ -3,8 +3,7 @@ import { computed, ref } from 'vue'
 
 import { AddNewCategory } from '@entities/Category.ts'
 import { Colors } from '@entities/Colors'
-
-import ColorPicker from '@components/ColorPicker.vue'
+import ColorPicker from '@features/colors/ui/ColorPicker.vue'
 
 const name = ref('')
 const color = ref<Colors>('fuchsia')

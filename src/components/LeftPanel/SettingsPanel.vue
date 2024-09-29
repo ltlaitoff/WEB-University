@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Mode } from '@entities/Mode'
+import ColorPicker from '@features/colors/ui/ColorPicker.vue'
 
-import ColorPicker from '@components/ColorPicker.vue'
 import ModeShild from '@components/ModeShild.vue'
 import NumberInput from '@components/NumberInput.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
