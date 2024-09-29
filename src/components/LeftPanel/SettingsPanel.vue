@@ -24,7 +24,10 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 					v-for="mode of modes"
 					:key="mode"
 				>
-					<ModeShild :mode="mode" />
+					<ModeShild
+						:mode="mode"
+						:color="userSettings.colors[mode]"
+					/>
 
 					<NumberInput
 						class="ml-1"

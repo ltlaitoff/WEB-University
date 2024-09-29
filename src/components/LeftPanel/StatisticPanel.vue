@@ -5,6 +5,7 @@ import TrashIcon from '@shared/icons/trash.svg'
 
 import ModeShild from '@components/ModeShild.vue'
 import { useStatistic } from '@store/statisticStore'
+import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
 const statisticStore = useStatistic()
 
@@ -14,6 +15,9 @@ const statisticForOutput = computed(() => {
 		return Number(b.date) - Number(a.date)
 	})
 })
+
+// TODO: Refactor
+const userSettings = useUserSettingsStore()
 </script>
 
 <template>
@@ -39,7 +43,10 @@ const statisticForOutput = computed(() => {
 				</div>
 
 				<div class="flex justify-between gap-x-4">
-					<ModeShild :mode="item.mode" />
+					<ModeShild
+						:mode="item.mode"
+						:color="userSettings.colors[item.mode]"
+					/>
 
 					<div
 						class="flex gap-x-2 items-center hover:bg-blue-100 hover:cursor-pointer transition-all duration-200"
