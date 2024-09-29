@@ -2,8 +2,8 @@
 import { computed } from 'vue'
 
 import { Mode } from '@entities/Mode'
+import { modeText } from '@entities/modes/modeText'
 
-import { modeText } from '@constants'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
 const props = defineProps<{
