@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import ModeShild from '@features/modes/ui/ModeShild.vue'
 import TrashIcon from '@shared/icons/trash.svg'
 
-import ModeShild from '@components/ModeShild.vue'
 import { useStatistic } from '@store/statisticStore'
 import { useUserSettingsStore } from '@store/userSettingsStore.ts'
 
@@ -27,9 +27,9 @@ const userSettings = useUserSettingsStore()
 		<div class="text-center text-2xl">{{ $t('statistic.title') }}</div>
 
 		<div
-			class="flex w-full gap-x-2"
 			v-for="item in statisticForOutput"
 			:key="item._id"
+			class="flex w-full gap-x-2"
 		>
 			<div class="w-full flex flex-col gap-y-1">
 				<div class="flex justify-between gap-x-5 items-center">

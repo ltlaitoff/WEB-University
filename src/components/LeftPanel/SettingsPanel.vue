@@ -1,9 +1,18 @@
+<i18n>
+{
+  "en": {
+    "Approaches count:": "Approaches count:"
+  }
+}
+</i18n>
+
 <script setup lang="ts">
 import { Mode } from '@entities/Mode'
+import NumberInput from '@features/base-inputs/ui/NumberInput.vue'
 import ColorPicker from '@features/colors/ui/ColorPicker.vue'
+import ModeShild from '@features/modes/ui/ModeShild.vue'
+import TimeInput from '@features/time/ui/TimeInput.vue'
 
-import ModeShild from '@components/ModeShild.vue'
-import NumberInput from '@components/NumberInput.vue'
 import { useUserSettingsStore } from '@store/userSettingsStore'
 
 const userSettings = useUserSettingsStore()
@@ -20,19 +29,18 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 		<div class="flex flex-col gap-y-10">
 			<div class="flex flex-col gap-y-10">
 				<div
-					class="flex flex-col gap-y-4"
 					v-for="mode of modes"
 					:key="mode"
+					class="flex flex-col gap-y-4"
 				>
 					<ModeShild
 						:mode="mode"
 						:color="userSettings.colors[mode]"
 					/>
 
-					<NumberInput
-						class="ml-1"
+					<TimeInput
 						v-model="userSettings.settings.times[mode]"
-						:max="Infinity"
+						class="ml-1"
 						:min="1"
 					/>
 
@@ -43,10 +51,10 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 					/>
 				</div>
 				<div class="">
-					<div class="px-4 text-lg">Approaches count:</div>
+					<div class="px-4 text-lg">{{ $t('Approaches count:') }}</div>
 					<NumberInput
-						class="ml-1 mt-1"
 						v-model="userSettings.settings.approachesCount"
+						class="ml-1 mt-1"
 						:max="100"
 						:min="1"
 					/>

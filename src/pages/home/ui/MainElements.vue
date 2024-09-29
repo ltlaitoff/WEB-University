@@ -89,10 +89,10 @@ const state = computed(() => {
 
 <template>
 	<div class="w-[450px] flex flex-col items-center">
-		<!--			@update:mode="onSelectedModeChange"-->
 		<SelectMode
-			v-model:mode="userSettings.selectedMode"
+			:mode="userSettings.selectedMode"
 			:colors="userSettings.colors"
+			@update:mode="onSelectedModeChange"
 		/>
 
 		<div class="py-16 flex flex-col justify-center">
@@ -111,11 +111,11 @@ const state = computed(() => {
 		</div>
 
 		<ControlButtons
+			:state="state"
+			:color="userSettings.getSelectedModeColor"
 			@stop-click="resetTimer"
 			@main-click="onPlayOrPauseClick"
 			@fast-forward-click="onFastForwardClick"
-			:state="state"
-			:color="userSettings.getSelectedModeColor"
 		/>
 	</div>
 </template>

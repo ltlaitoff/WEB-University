@@ -1,35 +1,27 @@
 <script setup lang="ts">
 import { defineModel, withDefaults } from 'vue'
 
-import { ONE_DAY } from '@shared/constants/time.ts'
+import { useNumberInput } from '@features/base-inputs/model/useNumberInput.ts'
 import MinusIcon from '@shared/icons/minus.svg'
 import PlusIcon from '@shared/icons/plus.svg'
 
-import { useTimeInput } from '../model/useTimeInput.ts'
-
-interface TimeInputProps {
-	/**
-	 * Min value in **seconds**
-	 */
+interface NumberInputProps {
 	min?: number
-	/**
-	 * Max value in **seconds**
-	 */
 	max?: number
 }
 
-const props = withDefaults(defineProps<TimeInputProps>(), {
+const props = withDefaults(defineProps<NumberInputProps>(), {
 	min: 0,
-	max: ONE_DAY
+	max: 1000
 })
 
-/**
- * Value in milliseconds
- */
 const model = defineModel<number>({ required: true })
 
-const { inputValue, increment, decrement, minValueAsDate, maxValueAsDate } =
-	useTimeInput(model, props.min, props.max)
+const { inputValue, increment, decrement } = useNumberInput(
+	model,
+	props.min,
+	props.max
+)
 </script>
 
 <template>
@@ -44,10 +36,9 @@ const { inputValue, increment, decrement, minValueAsDate, maxValueAsDate } =
 		<input
 			v-model="inputValue"
 			class="border border-slate-400 px-2 py-1 rounded-xl"
-			:min="minValueAsDate"
-			:max="maxValueAsDate"
-			type="time"
-			step="1"
+			type="number"
+			:min="props.min"
+			:max="props.max"
 		/>
 
 		<button
