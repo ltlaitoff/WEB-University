@@ -4,10 +4,10 @@ import { createI18n } from 'vue-i18n'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-import { vCloseModal } from '@directives'
+import App from '@app/ui/App.vue'
+import { vCloseModal } from '@shared/directives/vCloseModal'
+import enTranslation from '@shared/i18n'
 
-import App from './App.vue'
-import enTranslation from './assets/i18n/en/translation.json'
 import './style.css'
 
 const app = createApp(App)

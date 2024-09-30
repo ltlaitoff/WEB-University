@@ -14,32 +14,32 @@
 		"noEmit": true,
 		"jsx": "preserve",
 		"paths": {
-			/* Imports like '@components/App' */
-			"@assets/*": ["./src/assets/*"],
+			"@app/*": ["./src/app/*"],
+			"@pages/*": ["./src/pages/*"],
+			"@widgets/*": ["./src/widgets/*"],
+			"@features/*": ["./src/features/*"],
+			"@entities/*": ["./src/entities/*"],
+			"@shared/*": ["./src/shared/*"],
+
+			/* Imports like "@components/App" */
 			"@components/*": ["./src/components/*"],
 			"@constants/*": ["./src/constants/*"],
-			"@pages/*": ["./src/pages/*"],
 			"@store/*": ["./src/store/*"],
-			"@types/*": ["./src/types/*"],
 			"@utils/*": ["./src/utils/*"],
-			"@directives/*": ["./src/directives/*"],
 
 			/* Imports like '@constants' */
-			"@assets": ["./src/assets"],
 			"@components": ["./src/components"],
 			"@constants": ["./src/constants"],
-			"@pages": ["./src/pages"],
 			"@store": ["./src/store"],
-			"@types": ["./src/types"],
 			"@utils": ["./src/utils"],
-			"@directives": ["./src/directives"],
 			"@/*": ["./src/*"]
 		},
 		/* Linting */
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 	"references": [{ "path": "./tsconfig.node.json" }]
