@@ -1,11 +1,3 @@
-<i18n>
-{
-  "en": {
-    "Approaches count:": "Approaches count:"
-  }
-}
-</i18n>
-
 <script setup lang="ts">
 import { Mode } from '@entities/Mode'
 import NumberInput from '@features/base-inputs/ui/NumberInput.vue'
@@ -50,7 +42,7 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 					/>
 				</div>
 				<div class="">
-					<div class="px-4 text-lg">{{ $t('Approaches count:') }}</div>
+					<div class="px-4 text-lg">{{ $t('settings.approachesCount') }}:</div>
 					<NumberInput
 						v-model="userSettings.settings.approachesCount"
 						class="ml-1 mt-1"

@@ -14,6 +14,7 @@
 		"title": "Statistic"
 	},
 	"settings": {
-		"title": "Settings"
+		"title": "Settings",
+		"approachesCount": "Approaches count"
 	}
 }

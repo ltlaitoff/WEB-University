@@ -44,7 +44,7 @@ const userSettings = useUserSettingsStore()
 				<div class="flex justify-between gap-x-4">
 					<ModeShield
 						:mode="item.mode"
-						:color="userSettings.colors()[item.mode]"
+						:color="userSettings.colors[item.mode]"
 					/>
 
 					<div
