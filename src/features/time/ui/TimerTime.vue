@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TimerDigit from './TimerDigit.vue'
 
+// TODO: Refactor
 const props = defineProps<{
 	hours: number
 	minutes: number

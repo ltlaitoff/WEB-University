@@ -2,17 +2,19 @@
 import { ref } from 'vue'
 
 import { Category } from '@entities/Category'
+import { useCategoryStore } from '@shared/store/categoriesStore.ts'
 
-import { useCategoryStore } from '@store/categoriesStore'
-
+// TODO: Refactor
 const props = defineProps<{
 	modelValue: Category
 }>()
 
+// TODO: Refactor
 const emit = defineEmits<{
 	(e: 'update:modelValue', category: Category): void
 }>()
 
+// TODO: Remove store connect and use props instead
 const categoryStore = useCategoryStore()
 
 const opened = ref(false)
@@ -34,8 +36,8 @@ function hideSelect() {
 
 <template>
 	<div
-		class="flex justify-center relative"
 		v-close-modal="hideSelect"
+		class="flex justify-center relative"
 	>
 		<button
 			class="item rounded-full inline-flex gap-x-2 justify-center items-center px-4 py-2 hover:bg-blue-100 hover:cursor-pointer transition-all duration-200"
@@ -56,13 +58,13 @@ function hideSelect() {
 			<button
 				v-for="item in categoryStore.categories"
 				:key="item._id"
-				@click="() => onChange(item)"
 				class="item flex items-center gap-x-2 px-4 py-2 cursor-pointer transition-all duration-100"
 				:style="{
 					'--category-select-cicle-bg': `var(--color-${item.color}-400)`,
 					'--category-select-color': `var(--color-${item.color}-100)`,
 					'--category-select-bg-hover': `var(--color-${item.color}-200)`
 				}"
+				@click="() => onChange(item)"
 			>
 				{{ item.name }}
 			</button>

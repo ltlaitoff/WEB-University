@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserSettingsStore } from '@store/userSettingsStore.ts'
+import { useUserSettingsStore } from '@shared/store/userSettingsStore.ts'
 
 import LeftPanel from './LeftPanel.vue'
 import MainElements from './MainElements.vue'

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const props = defineProps<{
+interface CurrentApproachesProps {
 	currentApproach: number
 	approachesCount: number
-}>()
+}
+
+const props = defineProps<CurrentApproachesProps>()
 </script>
 
 <template>

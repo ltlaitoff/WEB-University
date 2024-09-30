@@ -6,24 +6,27 @@ import PauseIcon from '@shared/icons/pause.svg'
 import PlayIcon from '@shared/icons/play.svg'
 import StopIcon from '@shared/icons/stop.svg'
 
-const props = defineProps<{
+interface ControlButtonProps {
 	state: States
 	color: Colors
-}>()
+}
 
-const emits = defineEmits<{
+interface ControlButtonEmits {
 	(e: 'stop-click'): void
 	(e: 'main-click'): void
 	(e: 'fast-forward-click'): void
-}>()
+}
+
+const props = defineProps<ControlButtonProps>()
+const emits = defineEmits<ControlButtonEmits>()
 </script>
 
 <template>
 	<div class="flex justify-center items-center gap-x-2">
 		<div class="">
 			<button
-				@click="emits('stop-click')"
 				class="secondary-button inline text-lg px-4 py-4 rounded-2xl hover:shadow transition-all duration-200"
+				@click="emits('stop-click')"
 			>
 				<StopIcon class="w-5 h-5" />
 			</button>
@@ -31,8 +34,8 @@ const emits = defineEmits<{
 
 		<div class="">
 			<button
-				@click="emits('main-click')"
 				class="primary-button inline text-lg px-6 py-4 rounded-2xl hover:shadow transition-all duration-200"
+				@click="emits('main-click')"
 			>
 				<PlayIcon
 					v-if="props.state === States.timerPaused"
@@ -47,8 +50,8 @@ const emits = defineEmits<{
 
 		<div class="">
 			<button
-				@click="emits('fast-forward-click')"
 				class="secondary-button inline text-lg px-4 py-4 rounded-2xl hover:shadow transition-all duration-200"
+				@click="emits('fast-forward-click')"
 			>
 				<FastForwardIcon class="w-5 h-5" />
 			</button>

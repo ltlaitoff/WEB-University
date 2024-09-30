@@ -10,10 +10,9 @@
 import { Mode } from '@entities/Mode'
 import NumberInput from '@features/base-inputs/ui/NumberInput.vue'
 import ColorPicker from '@features/colors/ui/ColorPicker.vue'
-import ModeShild from '@features/modes/ui/ModeShild.vue'
+import ModeShield from '@features/modes/ui/ModeShield.vue'
 import TimeInput from '@features/time/ui/TimeInput.vue'
-
-import { useUserSettingsStore } from '@store/userSettingsStore'
+import { useUserSettingsStore } from '@shared/store/userSettingsStore.ts'
 
 const userSettings = useUserSettingsStore()
 
@@ -33,7 +32,7 @@ const modes: Mode[] = Object.values(Mode) as Mode[]
 					:key="mode"
 					class="flex flex-col gap-y-4"
 				>
-					<ModeShild
+					<ModeShield
 						:mode="mode"
 						:color="userSettings.colors[mode]"
 					/>

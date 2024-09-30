@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import ModeShild from '@features/modes/ui/ModeShild.vue'
+import ModeShield from '@features/modes/ui/ModeShield.vue'
 import TrashIcon from '@shared/icons/trash.svg'
-
-import { useStatistic } from '@store/statisticStore'
-import { useUserSettingsStore } from '@store/userSettingsStore.ts'
+import { useStatistic } from '@shared/store/statisticStore.ts'
+import { useUserSettingsStore } from '@shared/store/userSettingsStore.ts'
 
 const statisticStore = useStatistic()
 
@@ -16,7 +15,7 @@ const statisticForOutput = computed(() => {
 	})
 })
 
-// TODO: Refactor
+// TODO: Move it to props
 const userSettings = useUserSettingsStore()
 </script>
 
@@ -43,9 +42,9 @@ const userSettings = useUserSettingsStore()
 				</div>
 
 				<div class="flex justify-between gap-x-4">
-					<ModeShild
+					<ModeShield
 						:mode="item.mode"
-						:color="userSettings.colors[item.mode]"
+						:color="userSettings.colors()[item.mode]"
 					/>
 
 					<div

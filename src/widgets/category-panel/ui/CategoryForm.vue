@@ -8,10 +8,12 @@ import ColorPicker from '@features/colors/ui/ColorPicker.vue'
 const name = ref('')
 const color = ref<Colors>('fuchsia')
 
-const emits = defineEmits<{
+interface CategoryFormEmits {
 	(event: 'close'): void
 	(event: 'submit', payload: AddNewCategory): void
-}>()
+}
+
+const emits = defineEmits<CategoryFormEmits>()
 
 const touched = ref(false)
 
@@ -44,18 +46,18 @@ function changeColor(newColor: Colors) {
 
 <template>
 	<form
-		@submit="submit"
 		class="absolute max-w-[300px] shadow rounded-lg px-4 py-4 flex flex-col gap-y-6 border border-black"
+		@submit="submit"
 	>
 		<label class="flex gap-x-2 items-center">
 			<div class="text-slate-800">{{ $t('default.name') }}:</div>
 			<input
+				v-model="name"
 				class="w-full border border-slate-400 px-2 py-1 rounded-md"
 				:class="{
 					'border-red-400': allowShowError
 				}"
 				type="text"
-				v-model="name"
 				@input="onTouch"
 			/>
 		</label>

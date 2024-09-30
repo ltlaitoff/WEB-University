@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { LeftPanelStates } from '@pages/home/entities/LeftPanelStates.ts'
+import { useUserSettingsStore } from '@shared/store/userSettingsStore.ts'
 
-import { useUserSettingsStore } from '../../store/userSettingsStore'
-
+// TODO: Refactor
 const props = defineProps<{
 	isOpened: boolean
 	mode: LeftPanelStates
 	burgerOpened: boolean
 }>()
 
+// TODO: Refactor
 const emits = defineEmits<{
 	(event: 'click', value: LeftPanelStates): void
-	(event: 'burgerToggle'): void
+	(event: 'burger-toggle'): void
 }>()
 
 const userSettingsStore = useUserSettingsStore()
@@ -41,7 +42,6 @@ const data: {
 			v-for="item of data"
 			:key="item.key"
 			class="py-3 px-4 rounded-r-xl shadow clip-your-needful-style"
-			@click="emits('click', item.key)"
 			:style="{
 				color: `var(--color-${userSettingsStore.getSelectedModeColor}-950)`,
 				backgroundColor:
@@ -51,6 +51,7 @@ const data: {
 						? `var(--color-${userSettingsStore.getSelectedModeColor}-300)`
 						: `var(--color-${userSettingsStore.getSelectedModeColor}-200)`
 			}"
+			@click="emits('click', item.key)"
 		>
 			{{ item.title }}
 		</button>
@@ -65,7 +66,7 @@ const data: {
 			:style="{
 				backgroundColor: `var(--color-${userSettingsStore.getSelectedModeColor}-300)`
 			}"
-			@click="emits('burgerToggle')"
+			@click="emits('burger-toggle')"
 		>
 			<div class="flex flex-col gap-y-[3px]">
 				<div
@@ -91,10 +92,10 @@ const data: {
 				v-for="item of data"
 				:key="item.key"
 				class="py-6 px-4 hover:bg-slate-200 rounded-md transition-all duration-150 text-2xl w-full"
-				@click="emits('click', item.key)"
 				:style="{
 					color: `var(--color-${userSettingsStore.getSelectedModeColor}-950)`
 				}"
+				@click="emits('click', item.key)"
 			>
 				{{ item.title }}
 			</button>

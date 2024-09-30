@@ -11,6 +11,7 @@ import { selectModeComputeCssVariables } from '../utils/selectModeComputeCssVari
 
 const mode = defineModel<Mode>('mode', { required: true })
 
+// TODO: Refactor
 const props = defineProps<{
 	colors: Record<Mode, Colors>
 }>()
@@ -25,8 +26,8 @@ function changeSelectedMode(newMode: Mode) {
 
 <template>
 	<div
-		class="relative whitespace-nowrap"
 		v-close-modal="close"
+		class="relative whitespace-nowrap"
 	>
 		<button
 			class="item-colors rounded-full border flex items-center gap-x-2 px-4 py-2 item-colors-selected cursor-pointer transition-all duration-100"
@@ -48,8 +49,8 @@ function changeSelectedMode(newMode: Mode) {
 				v-for="mode in Object.values(Mode)"
 				:key="mode"
 				class="item-colors flex items-center gap-x-2 px-4 py-2 cursor-pointer transition-all duration-100"
-				@click="changeSelectedMode(mode)"
 				:style="selectModeComputeCssVariables(props.colors[mode])"
+				@click="changeSelectedMode(mode)"
 			>
 				<component
 					:is="modeIcons[mode]"

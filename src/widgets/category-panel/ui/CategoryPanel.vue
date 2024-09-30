@@ -3,8 +3,7 @@ import { ref } from 'vue'
 
 import { AddNewCategory } from '@entities/Category.ts'
 import TrashIcon from '@shared/icons/trash.svg'
-
-import { useCategoryStore } from '@store/categoriesStore'
+import { useCategoryStore } from '@shared/store/categoriesStore.ts'
 
 import CategoryForm from './CategoryForm.vue'
 
@@ -29,8 +28,8 @@ function submitForm(payload: AddNewCategory) {
 		<div class="text-center text-2xl">{{ $t('category.title') }}</div>
 
 		<div
-			class="relative"
 			v-close-modal="closeModal"
+			class="relative"
 		>
 			<button
 				class="border px-4 py-2 bg-white border-slate-400 rounded-xl text-slate-700 hover:bg-slate-100 transition-all duration-200"
@@ -40,18 +39,18 @@ function submitForm(payload: AddNewCategory) {
 			</button>
 
 			<CategoryForm
+				v-if="modalOpened"
 				class="top-12 z-50 bg-white"
 				@close="closeModal"
 				@submit="submitForm"
-				v-if="modalOpened"
 			/>
 		</div>
 
 		<div class="flex flex-col gap-y-2">
 			<div
-				class="flex justify-between transition-all duration-200"
 				v-for="category of categoryStore.categories"
 				:key="category._id"
+				class="flex justify-between transition-all duration-200"
 			>
 				<div class="flex gap-x-2 items-center">
 					<div

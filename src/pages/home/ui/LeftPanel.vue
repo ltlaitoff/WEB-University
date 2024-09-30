@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
-import CategoryPanel from '@components/LeftPanel/CategoryPanel.vue'
-import PanelButtons from '@components/LeftPanel/PanelButtons.vue'
-import SettingsPanel from '@components/LeftPanel/SettingsPanel.vue'
-import StatisticPanel from '@components/LeftPanel/StatisticPanel.vue'
-import { useUserSettingsStore } from '@store/userSettingsStore.ts'
+import { useUserSettingsStore } from '@shared/store/userSettingsStore.ts'
+import CategoryPanel from '@widgets/category-panel/ui/CategoryPanel.vue'
+import SettingsPanel from '@widgets/settings-panel/ui/SettingsPanel.vue'
+import StatisticPanel from '@widgets/statistic-panel/ui/StatisticPanel.vue'
 
 import { LeftPanelStates } from '../entities/LeftPanelStates.ts'
+import PanelButtons from './PanelButtons.vue'
 
 const userSettingsStore = useUserSettingsStore()
 
-const LeftPanelSettings = reactive<{
+interface LeftPanelSettingsType {
 	isOpened: boolean
 	mode: LeftPanelStates
-}>({
+}
+
+const LeftPanelSettings = reactive<LeftPanelSettingsType>({
 	isOpened: false,
 	mode: 'statistic'
 })
@@ -53,18 +55,18 @@ function toggleBurgerMenu() {
 		</div>
 
 		<PanelButtons
-			:isOpened="LeftPanelSettings.isOpened"
+			:is-opened="LeftPanelSettings.isOpened"
 			:mode="LeftPanelSettings.mode"
+			:burger-opened="false"
 			@click="onClick"
-			:burgerOpened="false"
-			@burgerToggle="() => {}"
+			@burger-toggle="() => {}"
 		/>
 	</div>
 
 	<div class="max-md:flex hidden">
 		<div
-			class="absolute w-full h-full bg-white border-r-[2px] z-20"
 			v-if="LeftPanelSettings.isOpened"
+			class="absolute w-full h-full bg-white border-r-[2px] z-20"
 		>
 			<StatisticPanel v-if="LeftPanelSettings.mode === 'statistic'" />
 			<SettingsPanel v-if="LeftPanelSettings.mode === 'settings'" />
@@ -86,11 +88,11 @@ function toggleBurgerMenu() {
 		</button>
 
 		<PanelButtons
-			:isOpened="LeftPanelSettings.isOpened"
+			:is-opened="LeftPanelSettings.isOpened"
 			:mode="LeftPanelSettings.mode"
+			:burger-opened="burgerMenuOpened"
 			@click="onClick"
-			:burgerOpened="burgerMenuOpened"
-			@burgerToggle="toggleBurgerMenu"
+			@burger-toggle="toggleBurgerMenu"
 		/>
 	</div>
 </template>
